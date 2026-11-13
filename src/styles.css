@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --brand-bg: #f2eee9;
+    --brand-beige: #e6dccd;
+    /*solo per 'Palumbo' nella home page*/
     --brand-ink: #1c1a17;
     --brand-line: #d8d5cf;
     --font-brand: 'Jost', system-ui, sans-serif;

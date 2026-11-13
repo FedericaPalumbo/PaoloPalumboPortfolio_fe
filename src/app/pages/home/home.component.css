@@ -1,0 +1,141 @@
+/* Hero a tutta altezza (mobile-first, desktop da 768px).
+   84px = altezza della navbar, che sulla home è trasparente e sta sopra l'immagine */
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: calc(84px + 3rem) 1.5rem 3rem;
+    font-family: var(--font-brand);
+    color: #fff;
+    /* il gradiente scurisce l'immagine per tenere leggibili i testi bianchi */
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('/images/hero.jpg') center / cover no-repeat;
+}
+
+/* ---------- eyebrow + nome ---------- */
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background-color: #fff;
+}
+
+/* il cognome è in corsivo, beige e rientrato; line-height basso per avvicinare le due righe */
+.hero-title {
+    margin: 1rem 0 0;
+    font-family: var(--font-logo);
+    font-size: clamp(4.5rem, 22vw, 7rem);
+    font-weight: 300;
+    line-height: 0.8;
+}
+
+.hero-first,
+.hero-last {
+    display: block;
+}
+
+.hero-last {
+    padding-left: 0.9em;
+    font-style: italic;
+    color: var(--brand-beige);
+}
+
+/* ---------- tagline + pulsante ---------- */
+.hero-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero-tagline {
+    max-width: 28rem;
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+/* trasparente con scritte bianche; in hover si inverte (sfondo bianco, scritte nere) */
+.hero-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 16rem;
+    height: 4.5rem;
+    padding: 0 1.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.hero-btn:hover {
+    color: var(--brand-ink);
+    background-color: #fff;
+}
+
+/* ---------- testo verticale a destra ---------- */
+.hero-side {
+    display: none;
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+    .hero {
+        padding-right: clamp(1.5rem, 7.6vw, 7rem);
+        padding-bottom: 4rem;
+        padding-left: clamp(1.5rem, 7.6vw, 7rem);
+    }
+
+    .hero-title {
+        font-size: clamp(7rem, 14vw, 13rem);
+    }
+
+    /* tagline allineata al cognome, pulsante a destra sulla stessa riga */
+    .hero-foot {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-left: 12vw;
+    }
+
+    .hero-btn {
+        flex-shrink: 0;
+        width: 16rem;
+    }
+
+    .hero-side {
+        position: absolute;
+        top: calc(84px + 2rem);
+        right: 1rem;
+        display: block;
+        margin: 0;
+        font-size: 0.625rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+    }
+}
