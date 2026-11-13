@@ -59,3 +59,20 @@
     left: 0;
     border-bottom: 1px solid #fff;
 }
+
+/* ---------- home: navbar trasparente sopra l'immagine ---------- */
+/* position: absolute toglie la navbar dal flusso, così l'immagine della home parte dal bordo alto */
+.app-navbar-home {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.app-navbar-home .brand-role {
+    border-left-color: rgba(255, 255, 255, 0.4);
+}
