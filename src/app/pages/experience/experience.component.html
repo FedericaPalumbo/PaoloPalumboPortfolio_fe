@@ -1,1 +1,27 @@
-<p>experience works!</p>
+<section class="experience">
+    <aside class="intro">
+        <div class="eyebrow">Selected milestones</div>
+        <h1 class="intro-title">A young<br>career<br>in <em>motion.</em></h1>
+        <p class="intro-text">Professional work, formative training, competitions, and awards.</p>
+        <a class="intro-btn" href="/cv.pdf" download>Download CV <span>&rarr;</span></a>
+    </aside>
+
+    <div class="timeline">
+        <ol class="milestones">
+            @for (milestone of milestones; track $index) {
+            <li class="milestone" [class.milestone-featured]="milestone.featured">
+                <span class="milestone-number">{{ ($index + 1) | number: '2.0-0' }}</span>
+                <span class="milestone-year">{{ milestone.year }}</span>
+                <div class="milestone-body">
+                    <h2 class="milestone-title">{{ milestone.title }}</h2>
+                    <p class="milestone-label">{{ milestone.label }}</p>
+                    <p class="milestone-text">{{ milestone.description }}</p>
+                </div>
+            </li>
+            }
+        </ol>
+
+        <p class="timeline-note">Additional guest training includes classical repertoire, Forsythe technique,
+            partnering, and contemporary improvisation.</p>
+    </div>
+</section>

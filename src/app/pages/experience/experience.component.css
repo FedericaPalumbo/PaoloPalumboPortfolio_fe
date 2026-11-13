@@ -1,0 +1,183 @@
+/* Mobile-first: colonna unica. Da 992px il testo a sinistra resta fermo e scorre solo la lista */
+.experience {
+    display: grid;
+    gap: 3rem;
+    padding: 3rem 1.5rem 5rem;
+    font-family: var(--font-brand);
+    color: var(--brand-ink);
+    background-color: var(--brand-bg);
+}
+
+/* ---------- colonna sinistra ---------- */
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background-color: var(--brand-red-dark);
+}
+
+.intro-title {
+    margin: 1.5rem 0;
+    font-family: var(--font-logo);
+    font-size: clamp(4rem, 16vw, 7rem);
+    font-weight: 300;
+    line-height: 0.95;
+}
+
+.intro-title em {
+    color: var(--brand-red);
+}
+
+.intro-text {
+    max-width: 18rem;
+    margin: 0 0 2.5rem;
+    line-height: 1.7;
+}
+
+/* bordo scuro; in hover si inverte (sfondo scuro, scritte chiare) */
+.intro-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 14rem;
+    height: 4rem;
+    padding: 0 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-ink);
+    text-decoration: none;
+    border: 1px solid var(--brand-ink);
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.intro-btn:hover {
+    color: var(--brand-bg);
+    background-color: var(--brand-ink);
+}
+
+/* ---------- lista ---------- */
+.milestones {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* mobile: numero e anno sulla stessa riga, il corpo sotto a tutta larghezza */
+.milestone {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--brand-line);
+}
+
+.milestone-number,
+.milestone-year {
+    padding-top: 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.milestone-number {
+    font-weight: 500;
+    color: var(--brand-red-dark);
+}
+
+.milestone-body {
+    grid-column: 1 / -1;
+}
+
+.milestone-title {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    font-weight: 300;
+    line-height: 1.05;
+    transition: color 0.25s;
+}
+
+.milestone:hover .milestone-title {
+    color: var(--brand-red);
+}
+
+.milestone-label {
+    margin: 1rem 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-red);
+}
+
+.milestone-text {
+    max-width: 32rem;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--brand-muted);
+}
+
+/* compagnia e scuole: titolo rosso scuro con linea laterale */
+.milestone-featured .milestone-body {
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--brand-red-dark);
+}
+
+.milestone-featured .milestone-title {
+    color: var(--brand-red-dark);
+}
+
+.timeline-note {
+    margin: 2rem 0 0;
+    font-size: 0.6875rem;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-muted);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 992px) {
+    .experience {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 4rem;
+        align-items: start;
+        padding: 4rem clamp(1.5rem, 7.6vw, 7rem) 6rem;
+    }
+
+    /* resta ferma mentre la lista scorre (la navbar non è fissa, quindi basta un piccolo margine) */
+    .intro {
+        position: sticky;
+        top: 2rem;
+    }
+
+    /* numero | anno | contenuto */
+    .milestone {
+        grid-template-columns: 4rem 11rem 1fr;
+        column-gap: 0;
+    }
+
+    .milestone-body {
+        grid-column: auto;
+    }
+
+    /* la nota parte dalla colonna del contenuto: 4rem + 11rem */
+    .timeline-note {
+        padding-left: 15rem;
+    }
+}

@@ -5,6 +5,9 @@
     /*solo per 'Palumbo' nella home page*/
     --brand-ink: #1c1a17;
     --brand-line: #d8d5cf;
+    --brand-red: #e03e2d;
+    --brand-red-dark: #8c1d28;
+    --brand-muted: #6b6760;
     --font-brand: 'Jost', system-ui, sans-serif;
     --font-logo: 'Cormorant Garamond', serif;
 }
