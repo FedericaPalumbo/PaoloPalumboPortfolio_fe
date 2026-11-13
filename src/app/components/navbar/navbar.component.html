@@ -1,7 +1,13 @@
 <nav class="app-navbar">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    <a routerLink="/about-me" routerLinkActive="active">About Me</a>
-    <a routerLink="/showreel" routerLinkActive="active">Showreel</a>
-    <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/contacts" routerLinkActive="active">Contacts</a>
+    <a class="brand" routerLink="/">
+        <span class="brand-logo">PP</span>
+        <span class="brand-role">Dance<br />Artist</span>
+    </a>
+
+    <div class="nav-links">
+        <a routerLink="/about-me" routerLinkActive="active">About</a>
+        <a routerLink="/showreel" routerLinkActive="active">Videos</a>
+        <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
+        <a routerLink="/contacts" routerLinkActive="active">Contact</a>
+    </div>
 </nav>
