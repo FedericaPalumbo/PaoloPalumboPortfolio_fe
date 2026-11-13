@@ -78,6 +78,7 @@
     font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: 300;
     line-height: 1.4;
+    color: var(--brand-red-dark);
 }
 
 .bio-text {

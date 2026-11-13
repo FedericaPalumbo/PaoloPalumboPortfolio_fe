@@ -1,0 +1,6 @@
+<figure class="quote-banner">
+    <!-- la foto è decorativa: il contenuto è la citazione, per questo alt vuoto -->
+    <img class="quote-image" [src]="quote().image" alt="" loading="lazy">
+    <blockquote class="quote-text">{{ quote().text }}</blockquote>
+    <figcaption class="quote-author">{{ quote().author }}</figcaption>
+</figure>

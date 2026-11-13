@@ -1,0 +1,91 @@
+/* l'host è un elemento custom (inline di default): va reso block per occupare tutta la larghezza,
+come per il footer */
+:host {
+    display: block;
+}
+
+/* Mobile-first: da 768px il banner diventa più alto */
+.quote-banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 22rem;
+    margin: 0;
+    padding: 4rem 1.5rem;
+    overflow: hidden;
+    text-align: center;
+    font-family: var(--font-brand);
+    color: #fff;
+    /* resta visibile finché la foto non c'è o non è caricata */
+    background-color: var(--brand-ink);
+}
+
+.quote-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* il velo scurisce la foto per tenere leggibili i testi bianchi (come nella hero) */
+.quote-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.quote-text,
+.quote-author {
+    position: relative;
+    z-index: 1;
+}
+
+/* ---------- citazione ---------- */
+.quote-text {
+    max-width: 40rem;
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    text-wrap: balance;
+    quotes: '\201C' '\201D';
+}
+
+.quote-text::before {
+    content: open-quote;
+}
+
+.quote-text::after {
+    content: close-quote;
+}
+
+/* ---------- autore ---------- */
+.quote-author {
+    margin-top: 2rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.quote-author::before {
+    content: '\2014\00a0';
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+    .quote-banner {
+        min-height: 32rem;
+        padding: 6rem 3.25rem;
+    }
+
+    .quote-author {
+        margin-top: 2.5rem;
+    }
+}
