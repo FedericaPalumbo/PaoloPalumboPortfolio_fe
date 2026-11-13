@@ -7,3 +7,9 @@ export type Milestone = {
     // true per compagnia e scuole: titolo rosso scuro con linea laterale
     featured?: boolean
 }
+
+// riga della fascia dati in fondo alla pagina About, es. { label: 'Languages', value: 'Italian · English' }
+export type ProfileFact = {
+    label: string,
+    value: string
+}

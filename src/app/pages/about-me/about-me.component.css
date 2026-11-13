@@ -1,0 +1,191 @@
+/* Mobile-first: foto sopra, testo sotto, dati in colonna. Da 992px foto a sinistra e testo a destra */
+.about {
+    position: relative;
+    padding: 3rem 1.5rem 0;
+    font-family: var(--font-brand);
+    color: var(--brand-ink);
+    background-color: var(--brand-bg);
+}
+
+.about-main {
+    display: grid;
+    gap: 5rem;
+}
+
+/* ---------- foto ---------- */
+/* la foto d'azione è ancorata in basso a destra del ritratto e ne esce per un quarto circa */
+.photos {
+    position: relative;
+    width: 82%;
+}
+
+.photo {
+    margin: 0;
+    overflow: hidden;
+}
+
+.photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-portrait {
+    aspect-ratio: 4 / 5;
+    background-color: var(--brand-ink);
+}
+
+/* il rosso resta visibile finché la foto non c'è o non è caricata */
+.photo-action {
+    position: absolute;
+    right: -22%;
+    bottom: -2.5rem;
+    width: 55%;
+    aspect-ratio: 1;
+    background-color: var(--brand-red-dark);
+}
+
+/* ---------- testo ---------- */
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background-color: var(--brand-red-dark);
+}
+
+.bio-title {
+    margin: 1.5rem 0 2.5rem;
+    font-family: var(--font-logo);
+    font-size: clamp(3rem, 13vw, 6.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+}
+
+.bio-lead {
+    margin: 0 0 2rem;
+    font-family: var(--font-logo);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.bio-text {
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tag {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--brand-line);
+    border-radius: 999px;
+}
+
+/* ---------- fascia dati ---------- */
+.facts {
+    margin: 6rem 0 0;
+    border-top: 1px solid var(--brand-line);
+}
+
+.fact {
+    padding: 1.75rem 0;
+}
+
+.fact+.fact {
+    border-top: 1px solid var(--brand-line);
+}
+
+.fact-label {
+    margin-bottom: 0.75rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-muted);
+}
+
+.fact-value {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+/* testo verticale a sinistra: solo desktop */
+.about-side {
+    display: none;
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 992px) {
+    .about {
+        padding: 4rem 3.25rem 0;
+    }
+
+    .about-main {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+        gap: 0;
+        align-items: start;
+    }
+
+    .photos {
+        width: 62%;
+    }
+
+    .photo-action {
+        right: -28%;
+        bottom: -26%;
+    }
+
+    .facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 7rem;
+    }
+
+    .fact {
+        padding: 2rem 1.5rem 2.5rem;
+    }
+
+    .fact+.fact {
+        border-top: 0;
+        border-left: 1px solid var(--brand-line);
+    }
+
+    .about-side {
+        position: absolute;
+        top: 50%;
+        left: 1.25rem;
+        display: block;
+        margin: 0;
+        font-size: 0.625rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+        transform: translateY(-50%) rotate(180deg);
+    }
+}

@@ -1,1 +1,46 @@
-<p>about-me works!</p>
+<section class="about">
+    <p class="about-side">Vicenza, Italy &middot; 2005</p>
+
+    <div class="about-main">
+        <div class="photos">
+            <figure class="photo photo-portrait">
+                <img src="/images/about-portrait.jpg" alt="Paolo Palumbo in arabesque in a sunlit ballet studio">
+            </figure>
+            <figure class="photo photo-action">
+                <img src="/images/about-action.jpg" alt="Paolo Palumbo performing on stage">
+            </figure>
+        </div>
+
+        <div class="bio">
+            <div class="eyebrow">biography and profile</div>
+            <h1 class="bio-title">A life in motion,<br>grounded in craft.</h1>
+
+            <p class="bio-lead">Born in Vicenza, Italy, Paolo began dancing at ten, discovering in ballet a language
+                for both precision and freedom.</p>
+
+            <p class="bio-text">His journey began at Domus Danza School in Schio under Enrica Marcucci. In 2020, he
+                joined the Annarella Sanchez International Conservatory, where he met pas de deux partner Nuria
+                Fernandes. Together they won Youth America Grand Prix honours for three consecutive years.</p>
+
+            <p class="bio-text">In 2024, after winning the YAGP semi-finals, Paolo qualified for the United States
+                finals. His performance of the <em>Don Quixote</em> variation placed him in the Top 12 of the Senior
+                Men category. Now working at Brno Theatre, he continues to deepen his technique, broaden his artistic
+                voice, and build a career defined by generosity, courage, and curiosity.</p>
+
+            <ul class="tags">
+                @for (tag of tags; track tag) {
+                <li class="tag">{{ tag }}</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <dl class="facts">
+        @for (fact of facts; track fact.label) {
+        <div class="fact">
+            <dt class="fact-label">{{ fact.label }}</dt>
+            <dd class="fact-value">{{ fact.value }}</dd>
+        </div>
+        }
+    </dl>
+</section>
