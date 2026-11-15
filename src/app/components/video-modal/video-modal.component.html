@@ -1,0 +1,20 @@
+<dialog #dialog class="modal" (close)="onClose.emit()" (click)="closeOnBackdrop($event)">
+    <div class="modal-panel">
+        <button type="button" class="modal-close" (click)="close()">Close <span
+                aria-hidden="true">&times;</span></button>
+
+        <div class="modal-media">
+            @if (video().src) {
+            <video class="modal-video" [src]="video().src" [poster]="video().poster" controls autoplay
+                playsinline></video>
+            } @else {
+            <img class="modal-image" [src]="video().poster" alt="">
+            <p class="modal-title">{{ video().title }}</p>
+            }
+        </div>
+
+        @if (!video().src) {
+        <p class="modal-caption">Video coming soon</p>
+        }
+    </div>
+</dialog>

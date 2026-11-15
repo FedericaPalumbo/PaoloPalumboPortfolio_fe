@@ -1,1 +1,37 @@
-<p>showreel works!</p>
+<section class="videos">
+    <header class="videos-header">
+        <div class="eyebrow">Performance film</div>
+        <div class="videos-heading">
+            <h1 class="videos-title">Showreel <em>&amp;</em> repertoire</h1>
+            <p class="videos-intro">Classical variations, contemporary studies, partnering, and moments from the
+                rehearsal room.</p>
+        </div>
+    </header>
+
+    <div class="section-head">
+        <div class="eyebrow">Showreel 2025</div>
+        <p class="section-meta">{{ showreel.duration }} min · {{ showreel.tags }}</p>
+    </div>
+
+    <app-video-poster class="showreel" [featured]="true" [image]="showreel.poster" [title]="showreel.title"
+        [label]="'Main showreel video placeholder · ' + showreel.duration" (onPlay)="selected.set(showreel)" />
+
+    <nav class="filters" aria-label="Video categories">
+        @for (item of filters; track item) {
+        <button type="button" class="filter" [class.active]="filter() === item" [attr.aria-pressed]="filter() === item"
+            (click)="filter.set(item)">{{ item }}</button>
+        }
+    </nav>
+
+    <div class="video-grid">
+        @for (item of visibleVideos(); track item.index) {
+        <app-video-card [video]="item.video" [index]="item.index" (onPlay)="selected.set(item.video)" />
+        } @empty {
+        <p class="empty-state">No videos in this category yet.</p>
+        }
+    </div>
+</section>
+
+@if (selected(); as video) {
+<app-video-modal [video]="video" (onClose)="selected.set(null)" />
+}

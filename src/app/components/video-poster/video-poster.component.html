@@ -1,0 +1,12 @@
+<button type="button" class="poster" [class.poster-featured]="featured()" [attr.aria-label]="'Play ' + title()"
+    (click)="play()">
+    <!-- la foto è decorativa: il contenuto è il titolo, per questo alt vuoto -->
+    <img class="poster-image" [src]="image()" alt="" loading="lazy">
+    <span class="poster-title">{{ title() }}</span>
+    <span class="poster-play" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 4l14 8-14 8z" />
+        </svg>
+    </span>
+    <span class="poster-label">{{ label() }}</span>
+</button>

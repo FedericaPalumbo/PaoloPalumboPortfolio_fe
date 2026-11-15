@@ -1,0 +1,134 @@
+/* Mobile-first: una colonna. Da 768px intestazione e testo si affiancano e i video vanno su due colonne */
+.videos {
+    --muted: color-mix(in srgb, var(--brand-bg) 60%, transparent);
+    --line: color-mix(in srgb, var(--brand-bg) 20%, transparent);
+    padding: 3rem clamp(1.5rem, 3.4vw, 3.75rem) 6rem;
+    font-family: var(--font-brand);
+    color: var(--brand-bg);
+    background-color: var(--brand-ink);
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background-color: currentColor;
+}
+
+/* ---------- intestazione ---------- */
+.videos-header {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.videos-heading {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.videos-title {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1;
+    color: #fff;
+}
+
+.videos-intro {
+    max-width: 29rem;
+    margin: 0;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+/* ---------- showreel ---------- */
+.section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    margin: 4rem 0 2rem;
+}
+
+.section-meta {
+    margin: 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.showreel {
+    --poster-ratio: 16 / 9;
+}
+
+/* ---------- filtri ---------- */
+/* la linea è un'ombra interna: la sottolineatura attiva (2px) ci passa sopra senza uscire dal riquadro */
+.filters {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 5rem;
+    overflow-x: auto;
+    box-shadow: inset 0 -1px 0 var(--line);
+}
+
+.filter {
+    padding: 0 0 1.25rem;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--muted);
+    background: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.25s;
+}
+
+.filter:hover,
+.filter.active {
+    color: #fff;
+}
+
+.filter.active {
+    border-bottom-color: #fff;
+}
+
+/* ---------- griglia ---------- */
+.video-grid {
+    display: grid;
+    gap: 3rem 1.75rem;
+    margin-top: 2.5rem;
+}
+
+.empty-state {
+    margin: 0;
+    color: var(--muted);
+}
+
+@media (min-width: 768px) {
+    .videos-heading {
+        grid-template-columns: 1fr minmax(0, 29rem);
+        align-items: end;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 4rem;
+    }
+}

@@ -1,0 +1,97 @@
+/* l'host è un elemento custom (inline di default): va reso block. È anche il "contenitore" che permette
+di misurare titolo e tasto in cqw, cioè in proporzione alla larghezza della copertina */
+:host {
+    display: block;
+    container-type: inline-size;
+}
+
+/* il rapporto si cambia dalla pagina con --poster-ratio (default 7 / 5) */
+.poster {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    aspect-ratio: var(--poster-ratio, 7 / 5);
+    padding: 0;
+    overflow: hidden;
+    font-family: var(--font-brand);
+    color: #fff;
+    /* resta visibile finché la foto non c'è o non è caricata */
+    background-color: var(--brand-ink);
+    border: 0;
+    cursor: pointer;
+}
+
+.poster:focus-visible {
+    outline: 2px solid var(--brand-bg);
+    outline-offset: 4px;
+}
+
+/* ---------- foto ---------- */
+/* brightness scurisce la foto per tenere leggibili i testi bianchi (come nella hero) */
+.poster-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    filter: brightness(0.6);
+    transition: filter 0.4s, transform 0.6s;
+}
+
+.poster:hover .poster-image {
+    filter: brightness(0.75);
+    transform: scale(1.03);
+}
+
+/* ---------- testi ---------- */
+.poster-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    text-align: center;
+    font-family: var(--font-logo);
+    font-size: clamp(1.75rem, 8cqw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    text-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.45);
+}
+
+.poster-featured .poster-title {
+    font-size: clamp(2.25rem, 11cqw, 8rem);
+}
+
+.poster-label {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 1.5rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- tasto play: cerchio sottile, in hover si riempie ---------- */
+.poster-play {
+    position: absolute;
+    top: 5cqw;
+    right: 6cqw;
+    display: grid;
+    place-items: center;
+    width: clamp(3rem, 10cqw, 5.5rem);
+    aspect-ratio: 1;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    transition: color 0.25s, background-color 0.25s;
+}
+
+.poster:hover .poster-play,
+.poster:focus-visible .poster-play {
+    color: var(--brand-ink);
+    background-color: var(--brand-bg);
+}

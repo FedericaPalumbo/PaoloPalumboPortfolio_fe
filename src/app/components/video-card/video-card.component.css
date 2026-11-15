@@ -1,0 +1,37 @@
+:host {
+    display: block;
+}
+
+/* numero | testi: il numero resta piccolo a sinistra, allineato alla prima riga del titolo */
+.video-info {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr;
+    align-items: baseline;
+    padding-top: 1.5rem;
+    font-family: var(--font-brand);
+}
+
+.video-number {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: color-mix(in srgb, var(--brand-bg) 60%, transparent);
+}
+
+.video-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-logo);
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.video-meta {
+    margin: 0;
+    font-size: 0.6875rem;
+    line-height: 1.9;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--brand-bg) 60%, transparent);
+}

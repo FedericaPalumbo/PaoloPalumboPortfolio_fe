@@ -1,0 +1,13 @@
+<article class="video-card">
+    <app-video-poster [image]="video().poster" [title]="video().title" [label]="video().category + ' video placeholder'"
+        (onPlay)="play()" />
+
+    <div class="video-info">
+        <span class="video-number">{{ number() }}</span>
+        <div>
+            <h3 class="video-title">{{ video().title }}</h3>
+            <p class="video-meta">{{ video().meta }}</p>
+            <p class="video-meta">Role: {{ video().role }}</p>
+        </div>
+    </div>
+</article>
