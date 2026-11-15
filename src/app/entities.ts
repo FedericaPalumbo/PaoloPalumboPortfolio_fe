@@ -20,3 +20,8 @@ export type QuoteBanner = {
     // percorso della foto in public/images
     image: string
 }
+// link ai social nella pagina Contacts
+export type SocialLink = {
+    label: string,
+    url: string
+}

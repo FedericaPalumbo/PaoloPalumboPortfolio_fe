@@ -1,1 +1,75 @@
-<p>contacts works!</p>
+<section class="contact">
+    <div class="intro">
+        <div class="eyebrow">Start a conversation</div>
+        <h1 class="intro-title">Let’s create<br><em>something</em></h1>
+        <p class="intro-text">Available for auditions, guest performances, creative collaborations, and
+            international engagements.</p>
+
+        <a class="intro-mail" [href]="'mailto:' + email">{{ email }} <span>&rarr;</span></a>
+
+        <ul class="socials">
+            @for (social of socials; track social.label) {
+            <li><a [href]="social.url" target="_blank" rel="noopener">{{ social.label }}</a></li>
+            }
+        </ul>
+
+        <div class="base">
+            <p class="base-label">Current base</p>
+            <p class="base-value">Brno, Czech Republic</p>
+            <p class="base-note">Available across Europe &amp; internationally</p>
+        </div>
+    </div>
+
+    <form class="form" [formGroup]="contactForm" (ngSubmit)="send()" novalidate>
+        <div class="form-row">
+            <label class="field">
+                <span class="field-label">Your name</span>
+                <input class="field-control" type="text" formControlName="name" placeholder="Name &amp; surname"
+                    autocomplete="name">
+                @if (fieldError('name'); as error) {
+                <span class="field-error">{{ error }}</span>
+                }
+            </label>
+
+            <label class="field">
+                <span class="field-label">Email address</span>
+                <input class="field-control" type="email" formControlName="email" placeholder="name@email.com"
+                    autocomplete="email">
+                @if (fieldError('email'); as error) {
+                <span class="field-error">{{ error }}</span>
+                }
+            </label>
+        </div>
+
+        <label class="field">
+            <span class="field-label">Reason for enquiry</span>
+            <select class="field-control field-select" formControlName="reason">
+                <option value="" disabled>Select one</option>
+                @for (reason of reasons; track reason) {
+                <option [value]="reason">{{ reason }}</option>
+                }
+            </select>
+            @if (fieldError('reason'); as error) {
+            <span class="field-error">{{ error }}</span>
+            }
+        </label>
+
+        <label class="field">
+            <span class="field-label">Your message</span>
+            <textarea class="field-control" rows="4" formControlName="message"
+                placeholder="Write your message here…"></textarea>
+            @if (fieldError('message'); as error) {
+            <span class="field-error">{{ error }}</span>
+            }
+        </label>
+
+        <button class="send-btn" type="submit" [disabled]="sending()">Send email <span>&rarr;</span></button>
+
+        @if (sent()) {
+        <p class="form-status" role="status">Thank you, your message has been sent.</p>
+        }
+        @if (errorMessage()) {
+        <p class="form-status form-status-error" role="alert">{{ errorMessage() }}</p>
+        }
+    </form>
+</section>
