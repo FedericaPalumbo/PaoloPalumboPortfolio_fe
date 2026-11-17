@@ -1,0 +1,12 @@
+<figure class="photo" [attr.data-shape]="photo().shape">
+    <div class="photo-frame">
+        <img class="photo-image" [src]="photo().image" [alt]="photo().title" loading="lazy">
+        <!-- testo provvisorio: da togliere quando ci sono le foto vere -->
+        <span class="photo-label">{{ photo().category }} photograph placeholder</span>
+    </div>
+
+    <figcaption class="photo-caption">
+        <h3 class="photo-title">{{ photo().title }}</h3>
+        <span class="photo-credit">Photo: {{ photo().credit }}</span>
+    </figcaption>
+</figure>

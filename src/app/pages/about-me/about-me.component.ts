@@ -12,7 +12,7 @@ export class AboutMeComponent {
   protected readonly tags: string[] = ['Classical Ballet', 'Contemporary', 'Pas de deux'];
 
   protected readonly quote: QuoteBanner = {
-    text: 'Meravigliosa performance, uno dei dieci talenti italiani.',
+    text: 'Meravigliosa performance, uno dei dieci giovani talenti italiani.',
     author: 'Ballerina Carla Fracci',
     image: '/images/about-banner.jpg',
   };

@@ -53,3 +53,19 @@ export type Showreel = Playable & {
     duration: string,
     tags: string
 }
+// categorie dei filtri nella pagina Gallery (il testo è anche l'etichetta mostrata, in maiuscolo via css)
+export type PhotoCategory = 'Stage' | 'Studio' | 'Movement' | 'Backstage' | 'Portraits'
+export type GalleryFilter = PhotoCategory | 'All'
+
+// proporzioni della foto nella griglia: alta, quadrata o larga (le definisce il css della card)
+export type PhotoShape = 'tall' | 'square' | 'wide'
+
+export type Photo = {
+    title: string,
+    category: PhotoCategory,
+    // percorso della foto in public/images
+    image: string,
+    // chi ha scattato, es. 'Elena Rossi'
+    credit: string,
+    shape: PhotoShape
+}

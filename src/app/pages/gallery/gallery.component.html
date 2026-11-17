@@ -1,1 +1,24 @@
-<p>gallery works!</p>
+<section class="gallery">
+    <header class="gallery-header">
+        <div class="eyebrow">Gallery</div>
+        <div class="gallery-heading">
+            <h1 class="gallery-title">Stillness within motion</h1>
+            <p class="gallery-intro">A curated collection of stage, studio, and behind-the-scenes photography.</p>
+        </div>
+    </header>
+
+    <nav class="filters" aria-label="Photo categories">
+        @for (item of filters; track item) {
+        <button type="button" class="filter" [class.active]="filter() === item" [attr.aria-pressed]="filter() === item"
+            (click)="filter.set(item)">{{ item }}</button>
+        }
+    </nav>
+
+    <div class="photo-grid">
+        @for (photo of visiblePhotos(); track photo.title) {
+        <app-photo-card [photo]="photo" />
+        } @empty {
+        <p class="empty-state">No photos in this category yet.</p>
+        }
+    </div>
+</section>

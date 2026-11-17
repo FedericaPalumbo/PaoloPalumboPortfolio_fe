@@ -1,0 +1,142 @@
+/* Mobile-first: una colonna. Da 640px due colonne, da 992px tre; da 768px titolo e testo si affiancano */
+.gallery {
+    padding: 3rem clamp(1.5rem, 3.4vw, 3.75rem) 6rem;
+    font-family: var(--font-brand);
+    color: var(--brand-ink);
+    background-color: var(--brand-bg);
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background-color: var(--brand-red-dark);
+}
+
+/* ---------- intestazione ---------- */
+.gallery-header {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--brand-line);
+}
+
+.gallery-heading {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.gallery-title {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1;
+}
+
+.gallery-intro {
+    max-width: 25rem;
+    margin: 0;
+    line-height: 1.7;
+    color: var(--brand-muted);
+}
+
+/* ---------- filtri ---------- */
+/* la linea è un'ombra interna: la sottolineatura attiva (2px) ci passa sopra senza uscire dal riquadro */
+.filters {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    overflow-x: auto;
+    box-shadow: inset 0 -1px 0 var(--brand-line);
+}
+
+.filter {
+    padding: 0 0 1.25rem;
+    font: inherit;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--brand-muted);
+    background: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.25s;
+}
+
+.filter:hover,
+.filter.active {
+    color: var(--brand-ink);
+}
+
+.filter.active {
+    border-bottom-color: var(--brand-ink);
+}
+
+/* ---------- griglia ---------- */
+/* align-items: start lascia a ogni foto la sua altezza: è questo che rende la griglia "sfalsata" */
+.photo-grid {
+    display: grid;
+    gap: 3rem 1.75rem;
+    align-items: start;
+    margin-top: 3rem;
+}
+
+.empty-state {
+    margin: 0;
+    color: var(--brand-muted);
+}
+
+/* le foto salgono dolcemente all'ingresso, con un leggero ritardo per colonna */
+@media (prefers-reduced-motion: no-preference) {
+    .photo-grid app-photo-card {
+        animation: rise 0.8s ease-out both;
+    }
+
+    .photo-grid app-photo-card:nth-child(3n + 2) {
+        animation-delay: 0.1s;
+    }
+
+    .photo-grid app-photo-card:nth-child(3n) {
+        animation-delay: 0.2s;
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(1.5rem);
+    }
+}
+
+@media (min-width: 640px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 4rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-heading {
+        grid-template-columns: 1fr minmax(0, 25rem);
+        align-items: end;
+    }
+}
+
+@media (min-width: 992px) {
+    .photo-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
