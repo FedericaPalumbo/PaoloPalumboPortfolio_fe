@@ -1,0 +1,76 @@
+/* l'host è un elemento custom (inline di default): va reso block per occupare tutta la larghezza */
+:host {
+    display: block;
+}
+
+/* Mobile-first: numero e anno sulla stessa riga, il corpo sotto a tutta larghezza (come in Experience) */
+.piece {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    padding: 2.5rem 0;
+    font-family: var(--font-brand);
+    color: var(--brand-ink);
+    border-bottom: 1px solid var(--brand-line);
+}
+
+.piece-number,
+.piece-year {
+    padding-top: 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.piece-number {
+    font-weight: 500;
+    color: var(--brand-red-dark);
+}
+
+.piece-body {
+    grid-column: 1 / -1;
+}
+
+.piece-title {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    font-weight: 300;
+    line-height: 1.05;
+    transition: color 0.25s;
+}
+
+.piece:hover .piece-title {
+    color: var(--brand-red);
+}
+
+.piece-label {
+    margin: 1rem 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-red);
+}
+
+.piece-text {
+    max-width: 32rem;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--brand-muted);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 992px) {
+
+    /* numero | anno | contenuto */
+    .piece {
+        grid-template-columns: 4rem 8rem 1fr;
+        column-gap: 0;
+    }
+
+    .piece-body {
+        grid-column: auto;
+    }
+}

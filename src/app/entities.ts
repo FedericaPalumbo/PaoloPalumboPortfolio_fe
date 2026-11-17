@@ -13,6 +13,16 @@ export type ProfileFact = {
     label: string,
     value: string
 }
+
+// riga del repertorio nella pagina About
+export type RepertoireItem = {
+    year: string,
+    title: string,
+    // categoria e dettaglio, es. 'Classical · Pas de deux'
+    label: string,
+    description: string
+}
+
 // banner a tutta larghezza con citazione sopra una foto
 export type QuoteBanner = {
     text: string,
