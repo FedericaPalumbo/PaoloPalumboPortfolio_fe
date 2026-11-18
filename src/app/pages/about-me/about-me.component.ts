@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ProfileFact, QuoteBanner, RepertoireItem } from '../../entities';
 import { QuoteBannerComponent } from '../../components/quote-banner/quote-banner.component';
 import { RepertoireItemComponent } from '../../components/repertoire-item/repertoire-item.component';
@@ -23,24 +23,37 @@ export class AboutMeComponent {
     { label: 'Height', value: '178 cm / 5′ 10″' },
     { label: 'Availability', value: 'Worldwide engagements' },
   ];
+
+  // per ora si riusano le foto già in public/images; con le foto ufficiali dei teatri basta cambiare image
   protected readonly repertoire: RepertoireItem[] = [
     {
-      year: '2024',
-      title: 'Don Quixote',
-      label: 'Classical · Basilio variation',
-      description: 'Senior Men solo at the YAGP Finals in the United States, placing in the Top 12.',
+      name: 'Brno Theatre',
+      period: '2024 — Present',
+      location: 'Brno, Czech Republic',
+      role: 'Company artist',
+      image: '/images/about-action.jpg',
+      // finché la lista è vuota la card non ha il pulsante per aprirsi: qui vanno i ruoli danzati a Brno
+      works: [],
     },
     {
-      year: '2023',
-      title: 'Le Corsaire',
-      label: 'Classical · Pas de deux',
-      description: 'With Nuria Fernandes. 1st place, Youth America Grand Prix.',
-    },
-    {
-      year: '2022',
-      title: 'Flames of Paris',
-      label: 'Classical · Pas de deux',
-      description: 'With Nuria Fernandes. 1st place, Youth America Grand Prix.',
+      name: 'Annarella Sanchez',
+      period: '2020 — 2024',
+      location: 'Leiria, Portugal',
+      role: 'Advanced student',
+      image: '/images/about-banner.jpg',
+      works: [
+        { title: 'Don Quixote', role: 'Basilio variation', stagedBy: 'Marius Petipa' },
+        { title: 'Le Corsaire', role: 'Pas de deux', stagedBy: 'Marius Petipa' },
+        { title: 'Flames of Paris', role: 'Pas de deux', stagedBy: 'Vasily Vainonen' },
+      ],
     },
   ];
+
+  // card aperta (una sola alla volta): null = tutte chiuse
+  protected openIndex = signal<number | null>(null);
+
+  // apre la card premuta (chiudendo quella aperta prima) o richiude quella già aperta
+  protected toggle(index: number) {
+    this.openIndex.set(this.openIndex() === index ? null : index);
+  }
 }

@@ -2,7 +2,7 @@
 .experience {
     display: grid;
     gap: 3rem;
-    padding: 3rem 1.5rem 5rem;
+    padding: 3rem var(--page-gutter) 5rem;
     font-family: var(--font-brand);
     color: var(--brand-ink);
     background-color: var(--brand-bg);
@@ -157,7 +157,7 @@
         grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
         gap: 4rem;
         align-items: start;
-        padding: 4rem clamp(1.5rem, 7.6vw, 7rem) 6rem;
+        padding-block: 4rem 6rem;
     }
 
     /* resta ferma mentre la lista scorre (la navbar non è fissa, quindi basta un piccolo margine) */

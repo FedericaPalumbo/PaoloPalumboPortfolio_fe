@@ -1,9 +1,36 @@
-<article class="piece">
-    <span class="piece-number">{{ number() }}</span>
-    <span class="piece-year">{{ item().year }}</span>
-    <div class="piece-body">
-        <h3 class="piece-title">{{ item().title }}</h3>
-        <p class="piece-label">{{ item().label }}</p>
-        <p class="piece-text">{{ item().description }}</p>
+<article class="venue" [class.open]="open()">
+    <!-- il click vale su tutta la riga (foto e testo); il pulsante resta per tastiera e screen reader -->
+    <div class="venue-row" [class.expandable]="expandable()" (click)="toggle()">
+        <figure class="venue-photo">
+            <img class="venue-image" [src]="item().image" [alt]="item().name" loading="lazy">
+            <span class="venue-number">{{ number() }}</span>
+            @if (expandable()) {
+            <span class="venue-hint">{{ open() ? 'Close repertoire' : 'Click to discover' }} &rarr;</span>
+            }
+        </figure>
+
+        <div class="venue-info">
+            <div class="venue-main">
+                <p class="venue-period">{{ item().period }}</p>
+                <h3 class="venue-name">{{ item().name }}</h3>
+                <p class="venue-location">{{ item().location }}</p>
+            </div>
+
+            <p class="venue-role">{{ item().role }}</p>
+
+            @if (expandable()) {
+            <button type="button" class="venue-toggle" [attr.aria-expanded]="open()"
+                [attr.aria-label]="(open() ? 'Close' : 'Open') + ' repertoire at ' + item().name"></button>
+            }
+        </div>
     </div>
+
+    @if (expandable()) {
+    <!-- sempre nel DOM: l'altezza passa da 0 a auto con una transizione css, e chiusa resta nascosta -->
+    <div class="venue-works">
+        <div class="venue-works-inner">
+            <app-repertoire-work-list [works]="item().works" />
+        </div>
+    </div>
+    }
 </article>

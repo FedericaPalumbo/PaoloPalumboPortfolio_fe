@@ -14,7 +14,7 @@ come per il footer */
     box-sizing: border-box;
     min-height: 22rem;
     margin: 0;
-    padding: 4rem 1.5rem;
+    padding: 4rem var(--page-gutter);
     overflow: hidden;
     text-align: center;
     font-family: var(--font-brand);
@@ -82,7 +82,7 @@ come per il footer */
 @media (min-width: 768px) {
     .quote-banner {
         min-height: 32rem;
-        padding: 6rem 3.25rem;
+        padding-block: 6rem;
     }
 
     .quote-author {

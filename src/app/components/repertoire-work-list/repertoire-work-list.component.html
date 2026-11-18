@@ -1,0 +1,12 @@
+<p class="works-eyebrow">Repertoire / Selected roles</p>
+
+<ol class="works">
+    @for (work of works(); track $index) {
+    <li class="work">
+        <span class="work-number">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+        <h4 class="work-title">{{ work.title }}</h4>
+        <p class="work-role">{{ work.role }}</p>
+        <p class="work-staged">Staged by {{ work.stagedBy }}</p>
+    </li>
+    }
+</ol>

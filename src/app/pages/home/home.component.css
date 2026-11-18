@@ -8,7 +8,7 @@
     gap: 3rem;
     box-sizing: border-box;
     min-height: 100vh;
-    padding: calc(84px + 3rem) 1.5rem 3rem;
+    padding: calc(84px + 3rem) var(--page-gutter) 3rem;
     font-family: var(--font-brand);
     color: #fff;
     /* il gradiente scurisce l'immagine per tenere leggibili i testi bianchi */
@@ -105,9 +105,7 @@
 /* ---------- desktop ---------- */
 @media (min-width: 768px) {
     .hero {
-        padding-right: clamp(1.5rem, 7.6vw, 7rem);
         padding-bottom: 4rem;
-        padding-left: clamp(1.5rem, 7.6vw, 7rem);
     }
 
     .hero-title {
@@ -130,7 +128,7 @@
     .hero-side {
         position: absolute;
         top: calc(84px + 2rem);
-        right: 1rem;
+        right: calc(var(--page-gutter) / 2 - 0.3rem);
         display: block;
         margin: 0;
         font-size: 0.625rem;

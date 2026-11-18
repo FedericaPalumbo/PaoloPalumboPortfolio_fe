@@ -2,7 +2,7 @@
 .videos {
     --muted: color-mix(in srgb, var(--brand-bg) 60%, transparent);
     --line: color-mix(in srgb, var(--brand-bg) 20%, transparent);
-    padding: 3rem clamp(1.5rem, 3.4vw, 3.75rem) 6rem;
+    padding: 3rem var(--page-gutter) 6rem;
     font-family: var(--font-brand);
     color: var(--brand-bg);
     background-color: var(--brand-ink);

@@ -1,6 +1,6 @@
 /* Mobile-first: una colonna. Da 640px due colonne, da 992px tre; da 768px titolo e testo si affiancano */
 .gallery {
-    padding: 3rem clamp(1.5rem, 3.4vw, 3.75rem) 6rem;
+    padding: 3rem var(--page-gutter) 6rem;
     font-family: var(--font-brand);
     color: var(--brand-ink);
     background-color: var(--brand-bg);
@@ -86,11 +86,10 @@
 }
 
 /* ---------- griglia ---------- */
-/* align-items: start lascia a ogni foto la sua altezza: è questo che rende la griglia "sfalsata" */
+/* le foto hanno tutte le stesse proporzioni (--photo-ratio), quindi le righe sono allineate */
 .photo-grid {
     display: grid;
     gap: 3rem 1.75rem;
-    align-items: start;
     margin-top: 3rem;
 }
 

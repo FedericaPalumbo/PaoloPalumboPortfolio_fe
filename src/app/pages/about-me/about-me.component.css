@@ -1,7 +1,7 @@
 /* Mobile-first: foto sopra, testo sotto, dati in colonna. Da 992px foto a sinistra e testo a destra */
 .about {
     position: relative;
-    padding: 3rem 1.5rem 0;
+    padding: 3rem var(--page-gutter) 0;
     font-family: var(--font-brand);
     color: var(--brand-ink);
     background-color: var(--brand-bg);
@@ -144,7 +144,7 @@
 /* ---------- desktop ---------- */
 @media (min-width: 992px) {
     .about {
-        padding: 4rem 3.25rem 0;
+        padding-top: 4rem;
     }
 
     .about-main {
@@ -180,7 +180,7 @@
     .about-side {
         position: absolute;
         top: 50%;
-        left: 1.25rem;
+        left: calc(var(--page-gutter) / 2 - 0.3rem);
         display: block;
         margin: 0;
         font-size: 0.625rem;
@@ -189,40 +189,56 @@
         writing-mode: vertical-rl;
         transform: translateY(-50%) rotate(180deg);
     }
-
-    .repertoire {
-        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-        gap: 4rem;
-        align-items: start;
-        padding: 6rem 3.25rem 7rem;
-    }
 }
 
 /* ---------- repertorio ---------- */
-/* Mobile-first: titolo sopra, lista sotto. Da 992px titolo a sinistra e lista a destra */
+/* Mobile-first: titolo sopra, testo sotto. Da 992px titolo a sinistra e testo a destra, sulla stessa riga */
 .repertoire {
-    display: grid;
-    gap: 3rem;
-    padding: 4rem 1.5rem 5rem;
+    padding: 4rem var(--page-gutter) 5rem;
     font-family: var(--font-brand);
     color: var(--brand-ink);
     background-color: var(--brand-bg);
 }
 
+.repertoire-header {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
 .repertoire-title {
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 0;
     font-family: var(--font-logo);
     font-size: clamp(3rem, 12vw, 5.5rem);
     font-weight: 300;
     line-height: 0.95;
 }
 
-.repertoire-text {
-    max-width: 18rem;
-    margin: 0;
-    line-height: 1.7;
+.repertoire-title em {
+    color: var(--brand-red);
 }
 
+.repertoire-text {
+    max-width: 22rem;
+    margin: 0;
+    line-height: 1.7;
+    color: var(--brand-muted);
+}
+
+/* ogni card ha il bordo sopra: la lista chiude con quello sotto */
 .repertoire-list {
-    border-top: 1px solid var(--brand-line);
+    border-bottom: 1px solid var(--brand-line);
+}
+
+@media (min-width: 992px) {
+    .repertoire {
+        padding: 6rem 3.25rem 7rem;
+    }
+
+    .repertoire-header {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+        align-items: end;
+        gap: 4rem;
+        margin-bottom: 5rem;
+    }
 }

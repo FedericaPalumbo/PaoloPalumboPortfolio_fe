@@ -3,74 +3,222 @@
     display: block;
 }
 
-/* Mobile-first: numero e anno sulla stessa riga, il corpo sotto a tutta larghezza (come in Experience) */
-.piece {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 1.5rem;
-    row-gap: 1rem;
-    padding: 2.5rem 0;
+.venue {
     font-family: var(--font-brand);
     color: var(--brand-ink);
-    border-bottom: 1px solid var(--brand-line);
+    border-top: 1px solid var(--brand-line);
 }
 
-.piece-number,
-.piece-year {
-    padding-top: 0.5rem;
+/* Mobile-first: foto sopra, testo sotto. Da 992px foto a sinistra e testo a destra */
+.venue-row {
+    display: grid;
+}
+
+.venue-row.expandable {
+    cursor: pointer;
+}
+
+/* ---------- foto ---------- */
+.venue-photo {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 5 / 3;
+    color: #fff;
+    background-color: var(--brand-ink);
+}
+
+.venue-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+/* velo scuro: tiene leggibile il testo sopra la foto, anche con foto chiare */
+.venue-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(28 26 23 / 0.75), rgb(28 26 23 / 0.35) 55%, rgb(28 26 23 / 0.2));
+    pointer-events: none;
+}
+
+.venue-row.expandable:hover .venue-image {
+    transform: scale(1.04);
+}
+
+.venue-number,
+.venue-hint {
+    position: absolute;
+    z-index: 1;
+    left: 1.5rem;
     font-size: 0.6875rem;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
 }
 
-.piece-number {
-    font-weight: 500;
-    color: var(--brand-red-dark);
+.venue-number {
+    top: 1.25rem;
 }
 
-.piece-body {
-    grid-column: 1 / -1;
+.venue-hint {
+    bottom: 1.5rem;
 }
 
-.piece-title {
+/* ---------- testo ---------- */
+.venue-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    padding: 2rem 1.5rem;
+}
+
+.venue-period {
     margin: 0;
-    font-family: var(--font-logo);
-    font-size: clamp(2rem, 6vw, 3.25rem);
-    font-weight: 300;
-    line-height: 1.05;
-    transition: color 0.25s;
-}
-
-.piece:hover .piece-title {
-    color: var(--brand-red);
-}
-
-.piece-label {
-    margin: 1rem 0;
     font-size: 0.6875rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--brand-red);
 }
 
-.piece-text {
-    max-width: 32rem;
+.venue-name {
+    margin: 0.75rem 0;
+    font-family: var(--font-logo);
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    font-weight: 300;
+    line-height: 1.05;
+    transition: color 0.25s;
+}
+
+.venue-row.expandable:hover .venue-name {
+    color: var(--brand-red);
+}
+
+.venue-location {
     margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.7;
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: var(--brand-muted);
+}
+
+.venue-role {
+    grid-column: 1;
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* ---------- pulsante + / − ---------- */
+.venue-toggle {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--brand-line);
+    border-radius: 50%;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+/* le due barre del + : quella verticale si schiaccia quando la card è aperta e resta il − */
+.venue-toggle::before,
+.venue-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1px;
+    background-color: var(--brand-ink);
+    transform: translate(-50%, -50%);
+    transition: transform 0.35s ease, background-color 0.25s;
+}
+
+.venue-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.venue.open .venue-toggle::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.venue-row.expandable:hover .venue-toggle,
+.venue-toggle:focus-visible {
+    background-color: var(--brand-ink);
+    border-color: var(--brand-ink);
+    outline: none;
+}
+
+.venue-row.expandable:hover .venue-toggle::before,
+.venue-row.expandable:hover .venue-toggle::after,
+.venue-toggle:focus-visible::before,
+.venue-toggle:focus-visible::after {
+    background-color: var(--brand-bg);
+}
+
+/* ---------- ruoli ---------- */
+/* grid-template-rows 0fr → 1fr: unico modo pulito per animare l'altezza da 0 ad auto.
+Chiusa è visibility: hidden, così i ruoli non si raggiungono con la tastiera */
+.venue-works {
+    display: grid;
+    grid-template-rows: 0fr;
+    padding: 0 1.5rem;
+    visibility: hidden;
+    transition: grid-template-rows 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.venue.open .venue-works {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    border-top: 1px solid var(--brand-line);
+    transition: grid-template-rows 0.5s ease;
+}
+
+.venue-works-inner {
+    min-height: 0;
+    overflow: hidden;
 }
 
 /* ---------- desktop ---------- */
 @media (min-width: 992px) {
 
-    /* numero | anno | contenuto */
-    .piece {
-        grid-template-columns: 4rem 8rem 1fr;
-        column-gap: 0;
+    /* foto 5/12 | testo 7/12; i ruoli stanno sotto la colonna del testo */
+    .venue-row {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     }
 
-    .piece-body {
-        grid-column: auto;
+    .venue-photo {
+        aspect-ratio: auto;
+        min-height: 19.5rem;
+    }
+
+    .venue-info {
+        grid-template-columns: minmax(0, 1fr) 10rem 3.5rem;
+        gap: 0 2rem;
+        padding: 2rem 3rem 2rem 4.5rem;
+    }
+
+    .venue-role {
+        grid-column: 2;
+    }
+
+    .venue-toggle {
+        grid-column: 3;
+        grid-row: auto;
+    }
+
+    .venue-works {
+        margin-left: calc(100% * 5 / 12);
+        padding: 0 3rem 0 4.5rem;
     }
 }

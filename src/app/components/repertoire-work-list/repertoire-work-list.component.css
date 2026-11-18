@@ -1,0 +1,75 @@
+:host {
+    display: block;
+    font-family: var(--font-brand);
+    color: var(--brand-ink);
+}
+
+.works-eyebrow {
+    margin: 0;
+    padding: 1.75rem 0;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.works {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--brand-line);
+}
+
+/* Mobile-first: numero e titolo sulla stessa riga, ruolo e regia sotto */
+.work {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    row-gap: 0.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--brand-line);
+}
+
+.work-number {
+    padding-top: 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--brand-muted);
+}
+
+.work-title {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.work-role,
+.work-staged {
+    grid-column: 2;
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
+.work-staged {
+    color: var(--brand-muted);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 992px) {
+
+    /* numero | titolo | ruolo | regia */
+    .work {
+        grid-template-columns: 3rem 1.1fr 1fr 1fr;
+        column-gap: 1.5rem;
+        align-items: start;
+        row-gap: 0;
+    }
+
+    .work-role,
+    .work-staged {
+        grid-column: auto;
+        padding-top: 0.35rem;
+    }
+}

@@ -46,15 +46,19 @@
 </section>
 <app-quote-banner [quote]="quote" />
 <section class="repertoire">
-    <header>
-        <div class="eyebrow">Selected works</div>
-        <h2 class="repertoire-title">Repertoire</h2>
-        <p class="repertoire-text">Classical variations and pas de deux, performed on stage and in competition.</p>
+    <header class="repertoire-header">
+        <div>
+            <div class="eyebrow">Stage &amp; training</div>
+            <h2 class="repertoire-title">Selected <em>repertoire.</em></h2>
+        </div>
+        <p class="repertoire-text">Explore the theatres and academies that shaped Paolo&rsquo;s practice, from early
+            training to his current professional work.</p>
     </header>
 
     <div class="repertoire-list">
-        @for (item of repertoire; track $index) {
-        <app-repertoire-item [item]="item" [index]="$index" />
+        @for (item of repertoire; track item.name) {
+        <app-repertoire-item [item]="item" [index]="$index" [open]="openIndex() === $index"
+            (onToggle)="toggle($index)" />
         }
     </div>
 </section>

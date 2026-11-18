@@ -14,13 +14,28 @@ export type ProfileFact = {
     value: string
 }
 
-// riga del repertorio nella pagina About
-export type RepertoireItem = {
-    year: string,
+// ruolo danzato in un teatro o in una scuola: riga della lista che si apre sotto la card
+export type RepertoireWork = {
     title: string,
-    // categoria e dettaglio, es. 'Classical · Pas de deux'
-    label: string,
-    description: string
+    // ruolo, es. 'Basilio variation'
+    role: string,
+    // chi ha messo in scena la coreografia, es. 'Marius Petipa': nella riga compare come 'Staged by Marius Petipa'
+    stagedBy: string
+}
+
+// teatro o scuola del repertorio nella pagina About
+export type RepertoireItem = {
+    name: string,
+    // es. '2024 — Present'
+    period: string,
+    // città e paese, es. 'Brno, Czech Republic'
+    location: string,
+    // ruolo ricoperto, es. 'Company artist'
+    role: string,
+    // percorso della foto in public/images
+    image: string,
+    // ruoli danzati: se la lista è vuota la card non ha il pulsante per aprirsi
+    works: RepertoireWork[]
 }
 
 // banner a tutta larghezza con citazione sopra una foto
@@ -67,15 +82,11 @@ export type Showreel = Playable & {
 export type PhotoCategory = 'Stage' | 'Studio' | 'Movement' | 'Backstage' | 'Portraits'
 export type GalleryFilter = PhotoCategory | 'All'
 
-// proporzioni della foto nella griglia: alta, quadrata o larga (le definisce il css della card)
-export type PhotoShape = 'tall' | 'square' | 'wide'
-
 export type Photo = {
     title: string,
     category: PhotoCategory,
     // percorso della foto in public/images
     image: string,
     // chi ha scattato, es. 'Elena Rossi'
-    credit: string,
-    shape: PhotoShape
+    credit: string
 }
