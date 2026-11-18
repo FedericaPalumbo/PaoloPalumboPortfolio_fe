@@ -72,4 +72,8 @@
         grid-column: auto;
         padding-top: 0.35rem;
     }
+
+    .work-role {
+        color: var(--brand-red);
+    }
 }

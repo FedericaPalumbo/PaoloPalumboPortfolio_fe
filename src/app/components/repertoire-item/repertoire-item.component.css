@@ -23,7 +23,7 @@
     position: relative;
     margin: 0;
     overflow: hidden;
-    aspect-ratio: 5 / 3;
+    aspect-ratio: var(--photo-ratio);
     color: #fff;
     background-color: var(--brand-ink);
 }
@@ -127,7 +127,6 @@
     background: none;
     border: 1px solid var(--brand-line);
     border-radius: 50%;
-    transition: background-color 0.25s, border-color 0.25s;
 }
 
 /* le due barre del + : quella verticale si schiaccia quando la card è aperta e resta il − */
@@ -141,7 +140,7 @@
     height: 1px;
     background-color: var(--brand-ink);
     transform: translate(-50%, -50%);
-    transition: transform 0.35s ease, background-color 0.25s;
+    transition: transform 0.35s ease
 }
 
 .venue-toggle::after {
@@ -152,18 +151,10 @@
     transform: translate(-50%, -50%) rotate(0deg);
 }
 
-.venue-row.expandable:hover .venue-toggle,
+/* il pulsante non cambia colore: restano visibili solo il focus da tastiera e l'animazione + / − */
 .venue-toggle:focus-visible {
-    background-color: var(--brand-ink);
-    border-color: var(--brand-ink);
-    outline: none;
-}
-
-.venue-row.expandable:hover .venue-toggle::before,
-.venue-row.expandable:hover .venue-toggle::after,
-.venue-toggle:focus-visible::before,
-.venue-toggle:focus-visible::after {
-    background-color: var(--brand-bg);
+    outline: 1px solid var(--brand-ink);
+    outline-offset: 3px;
 }
 
 /* ---------- ruoli ---------- */
@@ -197,9 +188,9 @@ Chiusa è visibility: hidden, così i ruoli non si raggiungono con la tastiera *
         grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     }
 
+    /* la foto non segue l'altezza della riga: ha sempre le proporzioni di --photo-ratio */
     .venue-photo {
-        aspect-ratio: auto;
-        min-height: 19.5rem;
+        align-self: start;
     }
 
     .venue-info {
