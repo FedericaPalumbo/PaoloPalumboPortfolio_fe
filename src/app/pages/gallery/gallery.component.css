@@ -86,11 +86,12 @@
 }
 
 /* ---------- griglia ---------- */
-/* le foto hanno tutte le stesse proporzioni (--photo-ratio), quindi le righe sono allineate */
+/* align-items: start lascia a ogni foto la sua altezza: è questo che rende la griglia "sfalsata" */
 .photo-grid {
     display: grid;
     gap: 3rem 1.75rem;
     margin-top: 3rem;
+    align-items: start;
 }
 
 .empty-state {

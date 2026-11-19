@@ -23,7 +23,7 @@
     position: relative;
     margin: 0;
     overflow: hidden;
-    aspect-ratio: var(--photo-ratio);
+    aspect-ratio: var(--repertoire-photo-ratio);
     color: #fff;
     background-color: var(--brand-ink);
 }

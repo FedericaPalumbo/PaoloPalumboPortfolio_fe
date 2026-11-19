@@ -13,8 +13,8 @@
 
     /* margine laterale di tutte le pagine: 1.5rem su mobile, cresce con lo schermo fino a ~213px a 1916px */
     --page-gutter: clamp(1.5rem, calc(14.1vw - 3.5rem), 18rem);
-    /* proporzioni di tutte le foto (605 x 314 px nel riferimento) */
-    --photo-ratio: 27 / 14;
+    /* proporzioni delle foto delle card del repertorio (605 x 314 px nel riferimento) */
+    --repertoire-photo-ratio: 27 / 14;
 }
 
 body {

@@ -82,6 +82,9 @@ export type Showreel = Playable & {
 export type PhotoCategory = 'Stage' | 'Studio' | 'Movement' | 'Backstage' | 'Portraits'
 export type GalleryFilter = PhotoCategory | 'All'
 
+// proporzioni della foto nella griglia: alta, quadrata o larga (le definisce il css della card)
+export type PhotoShape = 'tall' | 'square' | 'wide'
+
 export type Photo = {
     title: string,
     category: PhotoCategory,
@@ -89,4 +92,5 @@ export type Photo = {
     image: string,
     // chi ha scattato, es. 'Elena Rossi'
     credit: string
+    shape: PhotoShape
 }

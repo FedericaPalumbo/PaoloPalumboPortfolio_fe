@@ -16,36 +16,42 @@ export class GalleryComponent {
       category: 'Stage',
       image: '/images/hero.jpg',
       credit: 'Studio Archive',
+      shape: 'tall',
     },
     {
       title: 'Quiet Geometry',
       category: 'Studio',
       image: '/images/about-portrait.jpg',
       credit: 'Elena Rossi',
+      shape: 'wide',
     },
     {
       title: 'Flight Study',
       category: 'Movement',
       image: '/images/about-action.jpg',
       credit: 'Martin Kovář',
+      shape: 'square',
     },
     {
       title: 'Backstage, Brno',
       category: 'Backstage',
       image: '/images/about-banner.jpg',
       credit: 'Company Archive',
+      shape: 'tall',
     },
     {
       title: 'Pas de Deux',
       category: 'Stage',
       image: '/images/hero.jpg',
       credit: 'Luca Ferretti',
+      shape: 'wide',
     },
     {
       title: 'Portrait No. 01',
       category: 'Portraits',
       image: '/images/about-portrait.jpg',
       credit: 'Placeholder credit',
+      shape: 'square',
     },
   ];
 
