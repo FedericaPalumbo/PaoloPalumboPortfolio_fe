@@ -23,7 +23,7 @@ export type RepertoireWork = {
     stagedBy: string
 }
 
-// teatro o scuola del repertorio nella pagina About
+// teatro o scuola del repertorio nella pagina Experience
 export type RepertoireItem = {
     name: string,
     // es. '2024 — Present'
@@ -36,6 +36,15 @@ export type RepertoireItem = {
     image: string,
     // ruoli danzati: se la lista è vuota la card non ha il pulsante per aprirsi
     works: RepertoireWork[]
+}
+
+// artista ospite della sezione Masterclasses nella pagina Experience
+export type Masterclass = {
+    name: string,
+    // es. 'Guest artist'
+    role: string,
+    // percorso della foto in public/images
+    image: string
 }
 
 // banner a tutta larghezza con citazione sopra una foto

@@ -64,6 +64,38 @@
     background-color: var(--brand-red-dark);
 }
 
+/* eyebrow a sinistra, pulsante CV a destra sulla stessa riga; sotto i 992px il pulsante va a capo se non c'è spazio */
+.bio-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 1.5rem;
+}
+
+/* bordo scuro; in hover si inverte (sfondo scuro, scritte chiare) */
+.cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-sizing: border-box;
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-ink);
+    text-decoration: none;
+    border: 1px solid var(--brand-ink);
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.cv-btn:hover {
+    color: var(--brand-bg);
+    background-color: var(--brand-ink);
+}
+
 .bio-title {
     margin: 1.5rem 0 2.5rem;
     font-family: var(--font-logo);
@@ -188,57 +220,5 @@
         text-transform: uppercase;
         writing-mode: vertical-rl;
         transform: translateY(-50%) rotate(180deg);
-    }
-}
-
-/* ---------- repertorio ---------- */
-/* Mobile-first: titolo sopra, testo sotto. Da 992px titolo a sinistra e testo a destra, sulla stessa riga */
-.repertoire {
-    padding: 4rem var(--page-gutter) 5rem;
-    font-family: var(--font-brand);
-    color: var(--brand-ink);
-    background-color: var(--brand-bg);
-}
-
-.repertoire-header {
-    display: grid;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-}
-
-.repertoire-title {
-    margin: 1.5rem 0 0;
-    font-family: var(--font-logo);
-    font-size: clamp(3rem, 12vw, 5.5rem);
-    font-weight: 300;
-    line-height: 0.95;
-}
-
-.repertoire-title em {
-    color: var(--brand-red);
-}
-
-.repertoire-text {
-    max-width: 22rem;
-    margin: 0;
-    line-height: 1.7;
-    color: var(--brand-muted);
-}
-
-/* ogni card ha il bordo sopra: la lista chiude con quello sotto */
-.repertoire-list {
-    border-bottom: 1px solid var(--brand-line);
-}
-
-@media (min-width: 992px) {
-    .repertoire {
-        padding: 6rem 7rem;
-    }
-
-    .repertoire-header {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-        align-items: end;
-        gap: 4rem;
-        margin-bottom: 5rem;
     }
 }

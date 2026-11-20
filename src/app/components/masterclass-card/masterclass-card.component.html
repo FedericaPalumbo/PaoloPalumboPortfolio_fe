@@ -1,0 +1,9 @@
+<figure class="card">
+    <img class="card-image" [src]="artist().image" [alt]="artist().name" loading="lazy">
+    <span class="card-number">{{ number() }}</span>
+
+    <figcaption class="card-caption">
+        <p class="card-role">{{ artist().role }}</p>
+        <h3 class="card-name">{{ artist().name }}</h3>
+    </figcaption>
+</figure>

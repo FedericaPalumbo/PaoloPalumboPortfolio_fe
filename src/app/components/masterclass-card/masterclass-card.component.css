@@ -1,0 +1,77 @@
+:host {
+    display: block;
+}
+
+.card {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    font-family: var(--font-brand);
+    color: #fff;
+    background-color: var(--brand-ink);
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    transition: transform 0.8s ease;
+}
+
+/* velo scuro: tiene le foto in penombra e il testo leggibile; al passaggio del mouse si alleggerisce */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.85), rgb(0 0 0 / 0.5) 50%, rgb(0 0 0 / 0.55));
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.card:hover .card-image {
+    transform: scale(1.04);
+}
+
+.card:hover::after {
+    opacity: 0.4;
+}
+
+.card-number,
+.card-caption {
+    position: absolute;
+    z-index: 1;
+    left: 1.5rem;
+}
+
+.card-number {
+    top: 1.25rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--brand-red);
+}
+
+.card-caption {
+    right: 1.5rem;
+    bottom: 1.5rem;
+}
+
+.card-role {
+    margin: 0 0 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.7);
+}
+
+.card-name {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(1.75rem, 2.2vw, 2.25rem);
+    font-weight: 300;
+    line-height: 1.05;
+}

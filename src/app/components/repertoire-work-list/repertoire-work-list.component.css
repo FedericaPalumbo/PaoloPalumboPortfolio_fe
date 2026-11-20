@@ -56,6 +56,10 @@
     color: var(--brand-muted);
 }
 
+.work-staged strong {
+    font-weight: 600;
+}
+
 /* ---------- desktop ---------- */
 @media (min-width: 992px) {
 

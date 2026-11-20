@@ -3,7 +3,6 @@
         <div class="eyebrow">Selected milestones</div>
         <h1 class="intro-title">A young<br>career<br>in <em>motion.</em></h1>
         <p class="intro-text">Professional work, formative training, competitions, and awards.</p>
-        <a class="intro-btn" href="/cv.pdf" download>Download CV <span>&rarr;</span></a>
     </aside>
 
     <div class="timeline">
@@ -23,5 +22,40 @@
 
         <p class="timeline-note">Additional guest training includes classical repertoire, Forsythe technique,
             partnering, and contemporary improvisation.</p>
+    </div>
+</section>
+
+<section class="repertoire">
+    <header class="repertoire-header">
+        <div>
+            <div class="eyebrow">Stage &amp; training</div>
+            <h2 class="repertoire-title">Selected <em>repertoire.</em></h2>
+        </div>
+        <p class="repertoire-text">Explore the theatres and academies that shaped Paolo&rsquo;s practice, from early
+            training to his current professional work.</p>
+    </header>
+
+    <div class="repertoire-list">
+        @for (item of repertoire; track item.name) {
+        <app-repertoire-item [item]="item" [index]="$index" [open]="openIndex() === $index"
+            (onToggle)="toggle($index)" />
+        }
+    </div>
+</section>
+
+<section class="masterclasses">
+    <header class="masterclasses-header">
+        <div>
+            <p class="masterclasses-eyebrow">Continuing practice &middot; {{ masterclasses.length }} artists</p>
+            <h2 class="masterclasses-title">Masterclasses <em>&amp; encounters.</em></h2>
+        </div>
+        <p class="masterclasses-text">A practice continually renewed through encounters with leading dancers, teachers
+            and choreographic voices from the international stage.</p>
+    </header>
+
+    <div class="masterclasses-grid">
+        @for (artist of masterclasses; track artist.name) {
+        <app-masterclass-card [artist]="artist" [index]="$index" />
+        }
     </div>
 </section>

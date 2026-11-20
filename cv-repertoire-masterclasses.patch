@@ -1,0 +1,798 @@
+diff --git a/src/app/components/footer/footer.component.css b/src/app/components/footer/footer.component.css
+index 05ca38e..ebd1ec3 100644
+--- a/src/app/components/footer/footer.component.css
++++ b/src/app/components/footer/footer.component.css
+@@ -45,8 +45,17 @@
+     color: color-mix(in srgb, var(--brand-bg) 60%, transparent);
+ }
+ 
+-.back-to-top {
++/* Download CV sopra e Back to top sotto, allineati a destra */
++.footer-actions {
++    display: flex;
++    flex-direction: column;
++    align-items: flex-end;
++    gap: 0.75rem;
+     justify-self: end;
++}
++
++.back-to-top,
++.download-cv {
+     padding: 0;
+     font: inherit;
+     font-size: 0.6875rem;
+@@ -70,7 +79,8 @@
+ }
+ 
+ .footer-legal a:hover,
+-.back-to-top:hover {
++.back-to-top:hover,
++.download-cv:hover {
+     color: var(--brand-bg);
+ }
+ 
+@@ -83,7 +93,11 @@
+     }
+ 
+     .brand-logo,
+-    .back-to-top {
++    .footer-actions {
+         justify-self: center;
+     }
++
++    .footer-actions {
++        align-items: center;
++    }
+ }
+\ No newline at end of file
+diff --git a/src/app/components/footer/footer.component.html b/src/app/components/footer/footer.component.html
+index b5ba9c0..8333c7d 100644
+--- a/src/app/components/footer/footer.component.html
++++ b/src/app/components/footer/footer.component.html
+@@ -6,7 +6,10 @@
+             <p class="footer-tagline">Dance Artist · Classical &amp; Contemporary · Based in Brno · Available Worldwide
+             </p>
+ 
+-            <button class="back-to-top" type="button" (click)="scrollToTop()">Back to top &uarr;</button>
++            <div class="footer-actions">
++                <a class="download-cv" href="/cv.pdf" download>Download CV &darr;</a>
++                <button class="back-to-top" type="button" (click)="scrollToTop()">Back to top &uarr;</button>
++            </div>
+         </div>
+ 
+         <p class="footer-legal">
+diff --git a/src/app/components/masterclass-card/masterclass-card.component.css b/src/app/components/masterclass-card/masterclass-card.component.css
+new file mode 100644
+index 0000000..b38999b
+--- /dev/null
++++ b/src/app/components/masterclass-card/masterclass-card.component.css
+@@ -0,0 +1,77 @@
++:host {
++    display: block;
++}
++
++.card {
++    position: relative;
++    margin: 0;
++    aspect-ratio: 4 / 5;
++    overflow: hidden;
++    font-family: var(--font-brand);
++    color: #fff;
++    background-color: var(--brand-ink);
++}
++
++.card-image {
++    display: block;
++    width: 100%;
++    height: 100%;
++    object-fit: cover;
++    object-position: center 30%;
++    transition: transform 0.8s ease;
++}
++
++/* velo scuro: tiene le foto in penombra e il testo leggibile; al passaggio del mouse si alleggerisce */
++.card::after {
++    content: '';
++    position: absolute;
++    inset: 0;
++    background: linear-gradient(to top, rgb(0 0 0 / 0.85), rgb(0 0 0 / 0.5) 50%, rgb(0 0 0 / 0.55));
++    transition: opacity 0.6s ease;
++    pointer-events: none;
++}
++
++.card:hover .card-image {
++    transform: scale(1.04);
++}
++
++.card:hover::after {
++    opacity: 0.4;
++}
++
++.card-number,
++.card-caption {
++    position: absolute;
++    z-index: 1;
++    left: 1.5rem;
++}
++
++.card-number {
++    top: 1.25rem;
++    font-size: 0.6875rem;
++    font-weight: 500;
++    letter-spacing: 0.15em;
++    color: var(--brand-red);
++}
++
++.card-caption {
++    right: 1.5rem;
++    bottom: 1.5rem;
++}
++
++.card-role {
++    margin: 0 0 0.5rem;
++    font-size: 0.625rem;
++    font-weight: 500;
++    letter-spacing: 0.2em;
++    text-transform: uppercase;
++    color: rgb(255 255 255 / 0.7);
++}
++
++.card-name {
++    margin: 0;
++    font-family: var(--font-logo);
++    font-size: clamp(1.75rem, 2.2vw, 2.25rem);
++    font-weight: 300;
++    line-height: 1.05;
++}
+diff --git a/src/app/components/masterclass-card/masterclass-card.component.html b/src/app/components/masterclass-card/masterclass-card.component.html
+new file mode 100644
+index 0000000..2977e72
+--- /dev/null
++++ b/src/app/components/masterclass-card/masterclass-card.component.html
+@@ -0,0 +1,9 @@
++<figure class="card">
++    <img class="card-image" [src]="artist().image" [alt]="artist().name" loading="lazy">
++    <span class="card-number">{{ number() }}</span>
++
++    <figcaption class="card-caption">
++        <p class="card-role">{{ artist().role }}</p>
++        <h3 class="card-name">{{ artist().name }}</h3>
++    </figcaption>
++</figure>
+diff --git a/src/app/components/masterclass-card/masterclass-card.component.spec.ts b/src/app/components/masterclass-card/masterclass-card.component.spec.ts
+new file mode 100644
+index 0000000..e1334a8
+--- /dev/null
++++ b/src/app/components/masterclass-card/masterclass-card.component.spec.ts
+@@ -0,0 +1,27 @@
++import { ComponentFixture, TestBed } from '@angular/core/testing';
++import { MasterclassCardComponent } from './masterclass-card.component';
++
++describe('MasterclassCardComponent', () => {
++  let component: MasterclassCardComponent;
++  let fixture: ComponentFixture<MasterclassCardComponent>;
++
++  beforeEach(async () => {
++    await TestBed.configureTestingModule({
++      imports: [MasterclassCardComponent],
++    }).compileComponents();
++
++    fixture = TestBed.createComponent(MasterclassCardComponent);
++    fixture.componentRef.setInput('artist', { name: 'Test Artist', role: 'Guest artist', image: '/images/hero.jpg' });
++    fixture.componentRef.setInput('index', 0);
++    component = fixture.componentInstance;
++    await fixture.whenStable();
++  });
++
++  it('should create', () => {
++    expect(component).toBeTruthy();
++  });
++
++  it('should number the card from 01', () => {
++    expect(component.number()).toBe('01');
++  });
++});
+diff --git a/src/app/components/masterclass-card/masterclass-card.component.ts b/src/app/components/masterclass-card/masterclass-card.component.ts
+new file mode 100644
+index 0000000..e429c6a
+--- /dev/null
++++ b/src/app/components/masterclass-card/masterclass-card.component.ts
+@@ -0,0 +1,19 @@
++import { Component, computed, input } from '@angular/core';
++import { Masterclass } from '../../entities';
++
++/* MasterclassCard è la card di un artista ospite: foto scura a tutta card, numero in alto, ruolo e nome in basso.
++Passando il mouse la foto si schiarisce.
++È un componente "stupido" (di presentazione): riceve l'artista e la sua posizione nella griglia. */
++@Component({
++  selector: 'app-masterclass-card',
++  imports: [],
++  templateUrl: './masterclass-card.component.html',
++  styleUrl: './masterclass-card.component.css',
++})
++export class MasterclassCardComponent {
++  artist = input.required<Masterclass>();
++  // posizione nella griglia: decide il numero (01, 02, ...)
++  index = input.required<number>();
++
++  number = computed(() => String(this.index() + 1).padStart(2, '0'));
++}
+diff --git a/src/app/components/repertoire-work-list/repertoire-work-list.component.css b/src/app/components/repertoire-work-list/repertoire-work-list.component.css
+index a30c063..6ceb3f6 100644
+--- a/src/app/components/repertoire-work-list/repertoire-work-list.component.css
++++ b/src/app/components/repertoire-work-list/repertoire-work-list.component.css
+@@ -56,6 +56,10 @@
+     color: var(--brand-muted);
+ }
+ 
++.work-staged strong {
++    font-weight: 600;
++}
++
+ /* ---------- desktop ---------- */
+ @media (min-width: 992px) {
+ 
+diff --git a/src/app/components/repertoire-work-list/repertoire-work-list.component.html b/src/app/components/repertoire-work-list/repertoire-work-list.component.html
+index fe45060..d2cc83a 100644
+--- a/src/app/components/repertoire-work-list/repertoire-work-list.component.html
++++ b/src/app/components/repertoire-work-list/repertoire-work-list.component.html
+@@ -6,7 +6,7 @@
+         <span class="work-number">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+         <h4 class="work-title">{{ work.title }}</h4>
+         <p class="work-role">{{ work.role }}</p>
+-        <p class="work-staged">Staged by {{ work.stagedBy }}</p>
++        <p class="work-staged">Staged by <strong>{{ work.stagedBy }}</strong></p>
+     </li>
+     }
+ </ol>
+\ No newline at end of file
+diff --git a/src/app/entities.ts b/src/app/entities.ts
+index 246a504..7bc17b7 100644
+--- a/src/app/entities.ts
++++ b/src/app/entities.ts
+@@ -23,7 +23,7 @@ export type RepertoireWork = {
+     stagedBy: string
+ }
+ 
+-// teatro o scuola del repertorio nella pagina About
++// teatro o scuola del repertorio nella pagina Experience
+ export type RepertoireItem = {
+     name: string,
+     // es. '2024 — Present'
+@@ -38,6 +38,15 @@ export type RepertoireItem = {
+     works: RepertoireWork[]
+ }
+ 
++// artista ospite della sezione Masterclasses nella pagina Experience
++export type Masterclass = {
++    name: string,
++    // es. 'Guest artist'
++    role: string,
++    // percorso della foto in public/images
++    image: string
++}
++
+ // banner a tutta larghezza con citazione sopra una foto
+ export type QuoteBanner = {
+     text: string,
+diff --git a/src/app/pages/about-me/about-me.component.css b/src/app/pages/about-me/about-me.component.css
+index 1a779de..043eb29 100644
+--- a/src/app/pages/about-me/about-me.component.css
++++ b/src/app/pages/about-me/about-me.component.css
+@@ -64,6 +64,38 @@
+     background-color: var(--brand-red-dark);
+ }
+ 
++/* eyebrow a sinistra, pulsante CV a destra sulla stessa riga; sotto i 992px il pulsante va a capo se non c'è spazio */
++.bio-head {
++    display: flex;
++    flex-wrap: wrap;
++    align-items: center;
++    justify-content: space-between;
++    gap: 1.25rem 1.5rem;
++}
++
++/* bordo scuro; in hover si inverte (sfondo scuro, scritte chiare) */
++.cv-btn {
++    display: inline-flex;
++    align-items: center;
++    gap: 0.75rem;
++    box-sizing: border-box;
++    height: 2.5rem;
++    padding: 0 1.25rem;
++    font-size: 0.6875rem;
++    font-weight: 500;
++    letter-spacing: 0.15em;
++    text-transform: uppercase;
++    color: var(--brand-ink);
++    text-decoration: none;
++    border: 1px solid var(--brand-ink);
++    transition: background-color 0.25s, color 0.25s;
++}
++
++.cv-btn:hover {
++    color: var(--brand-bg);
++    background-color: var(--brand-ink);
++}
++
+ .bio-title {
+     margin: 1.5rem 0 2.5rem;
+     font-family: var(--font-logo);
+@@ -190,55 +222,3 @@
+         transform: translateY(-50%) rotate(180deg);
+     }
+ }
+-
+-/* ---------- repertorio ---------- */
+-/* Mobile-first: titolo sopra, testo sotto. Da 992px titolo a sinistra e testo a destra, sulla stessa riga */
+-.repertoire {
+-    padding: 4rem var(--page-gutter) 5rem;
+-    font-family: var(--font-brand);
+-    color: var(--brand-ink);
+-    background-color: var(--brand-bg);
+-}
+-
+-.repertoire-header {
+-    display: grid;
+-    gap: 1.5rem;
+-    margin-bottom: 4rem;
+-}
+-
+-.repertoire-title {
+-    margin: 1.5rem 0 0;
+-    font-family: var(--font-logo);
+-    font-size: clamp(3rem, 12vw, 5.5rem);
+-    font-weight: 300;
+-    line-height: 0.95;
+-}
+-
+-.repertoire-title em {
+-    color: var(--brand-red);
+-}
+-
+-.repertoire-text {
+-    max-width: 22rem;
+-    margin: 0;
+-    line-height: 1.7;
+-    color: var(--brand-muted);
+-}
+-
+-/* ogni card ha il bordo sopra: la lista chiude con quello sotto */
+-.repertoire-list {
+-    border-bottom: 1px solid var(--brand-line);
+-}
+-
+-@media (min-width: 992px) {
+-    .repertoire {
+-        padding: 6rem 7rem;
+-    }
+-
+-    .repertoire-header {
+-        grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+-        align-items: end;
+-        gap: 4rem;
+-        margin-bottom: 5rem;
+-    }
+-}
+\ No newline at end of file
+diff --git a/src/app/pages/about-me/about-me.component.html b/src/app/pages/about-me/about-me.component.html
+index d8647fd..c12b779 100644
+--- a/src/app/pages/about-me/about-me.component.html
++++ b/src/app/pages/about-me/about-me.component.html
+@@ -12,7 +12,10 @@
+         </div>
+ 
+         <div class="bio">
+-            <div class="eyebrow">biography and profile</div>
++            <div class="bio-head">
++                <div class="eyebrow">biography and profile</div>
++                <a class="cv-btn" href="/cv.pdf" download>Download CV <span>&darr;</span></a>
++            </div>
+             <h1 class="bio-title">A life in motion,<br>grounded in craft.</h1>
+ 
+             <p class="bio-lead">Born in Vicenza, Italy, Paolo began dancing at ten, discovering in ballet a language
+@@ -45,20 +48,3 @@
+     </dl>
+ </section>
+ <app-quote-banner [quote]="quote" />
+-<section class="repertoire">
+-    <header class="repertoire-header">
+-        <div>
+-            <div class="eyebrow">Stage &amp; training</div>
+-            <h2 class="repertoire-title">Selected <em>repertoire.</em></h2>
+-        </div>
+-        <p class="repertoire-text">Explore the theatres and academies that shaped Paolo&rsquo;s practice, from early
+-            training to his current professional work.</p>
+-    </header>
+-
+-    <div class="repertoire-list">
+-        @for (item of repertoire; track item.name) {
+-        <app-repertoire-item [item]="item" [index]="$index" [open]="openIndex() === $index"
+-            (onToggle)="toggle($index)" />
+-        }
+-    </div>
+-</section>
+\ No newline at end of file
+diff --git a/src/app/pages/about-me/about-me.component.ts b/src/app/pages/about-me/about-me.component.ts
+index ad78691..e5d38c6 100644
+--- a/src/app/pages/about-me/about-me.component.ts
++++ b/src/app/pages/about-me/about-me.component.ts
+@@ -1,9 +1,8 @@
+-import { Component, signal } from '@angular/core';
+-import { ProfileFact, QuoteBanner, RepertoireItem } from '../../entities';
++import { Component } from '@angular/core';
++import { ProfileFact, QuoteBanner } from '../../entities';
+ import { QuoteBannerComponent } from '../../components/quote-banner/quote-banner.component';
+-import { RepertoireItemComponent } from '../../components/repertoire-item/repertoire-item.component';
+ @Component({
+-  imports: [QuoteBannerComponent, RepertoireItemComponent],
++  imports: [QuoteBannerComponent],
+   selector: 'app-about-me',
+   styleUrl: './about-me.component.css',
+   templateUrl: './about-me.component.html',
+@@ -24,36 +23,4 @@ export class AboutMeComponent {
+     { label: 'Availability', value: 'Worldwide engagements' },
+   ];
+ 
+-  // per ora si riusano le foto già in public/images; con le foto ufficiali dei teatri basta cambiare image
+-  protected readonly repertoire: RepertoireItem[] = [
+-    {
+-      name: 'Brno Theatre',
+-      period: '2024 — Present',
+-      location: 'Brno, Czech Republic',
+-      role: 'Company artist',
+-      image: '/images/about-action.jpg',
+-      // finché la lista è vuota la card non ha il pulsante per aprirsi: qui vanno i ruoli danzati a Brno
+-      works: [],
+-    },
+-    {
+-      name: 'Annarella Sanchez',
+-      period: '2020 — 2024',
+-      location: 'Leiria, Portugal',
+-      role: 'Advanced student',
+-      image: '/images/about-banner.jpg',
+-      works: [
+-        { title: 'Don Quixote', role: 'Basilio variation', stagedBy: 'Marius Petipa' },
+-        { title: 'Le Corsaire', role: 'Pas de deux', stagedBy: 'Marius Petipa' },
+-        { title: 'Flames of Paris', role: 'Pas de deux', stagedBy: 'Vasily Vainonen' },
+-      ],
+-    },
+-  ];
+-
+-  // card aperta (una sola alla volta): null = tutte chiuse
+-  protected openIndex = signal<number | null>(null);
+-
+-  // apre la card premuta (chiudendo quella aperta prima) o richiude quella già aperta
+-  protected toggle(index: number) {
+-    this.openIndex.set(this.openIndex() === index ? null : index);
+-  }
+ }
+\ No newline at end of file
+diff --git a/src/app/pages/experience/experience.component.css b/src/app/pages/experience/experience.component.css
+index 2317c4b..da723cc 100644
+--- a/src/app/pages/experience/experience.component.css
++++ b/src/app/pages/experience/experience.component.css
+@@ -40,35 +40,10 @@
+ 
+ .intro-text {
+     max-width: 18rem;
+-    margin: 0 0 2.5rem;
++    margin: 0;
+     line-height: 1.7;
+ }
+ 
+-/* bordo scuro; in hover si inverte (sfondo scuro, scritte chiare) */
+-.intro-btn {
+-    display: flex;
+-    align-items: center;
+-    justify-content: space-between;
+-    box-sizing: border-box;
+-    width: 100%;
+-    max-width: 14rem;
+-    height: 4rem;
+-    padding: 0 1.5rem;
+-    font-size: 0.75rem;
+-    font-weight: 500;
+-    letter-spacing: 0.15em;
+-    text-transform: uppercase;
+-    color: var(--brand-ink);
+-    text-decoration: none;
+-    border: 1px solid var(--brand-ink);
+-    transition: background-color 0.25s, color 0.25s;
+-}
+-
+-.intro-btn:hover {
+-    color: var(--brand-bg);
+-    background-color: var(--brand-ink);
+-}
+-
+ /* ---------- lista ---------- */
+ .milestones {
+     margin: 0;
+@@ -180,4 +155,137 @@
+     .timeline-note {
+         padding-left: 15rem;
+     }
+-}
+\ No newline at end of file
++}
++
++/* ---------- repertorio ---------- */
++/* Mobile-first: titolo sopra, testo sotto. Da 992px titolo a sinistra e testo a destra, sulla stessa riga */
++.repertoire {
++    padding: 0 var(--page-gutter) 5rem;
++    font-family: var(--font-brand);
++    color: var(--brand-ink);
++    background-color: var(--brand-bg);
++}
++
++.repertoire-header {
++    display: grid;
++    gap: 1.5rem;
++    margin-bottom: 4rem;
++}
++
++.repertoire-title {
++    margin: 1.5rem 0 0;
++    font-family: var(--font-logo);
++    font-size: clamp(3rem, 12vw, 5.5rem);
++    font-weight: 300;
++    line-height: 0.95;
++}
++
++.repertoire-title em {
++    color: var(--brand-red);
++}
++
++.repertoire-text {
++    max-width: 22rem;
++    margin: 0;
++    line-height: 1.7;
++    color: var(--brand-muted);
++}
++
++/* ogni card ha il bordo sopra: la lista chiude con quello sotto */
++.repertoire-list {
++    border-bottom: 1px solid var(--brand-line);
++}
++
++@media (min-width: 992px) {
++    .repertoire {
++        padding-bottom: 6rem;
++    }
++
++    .repertoire-header {
++        grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
++        align-items: end;
++        gap: 4rem;
++        margin-bottom: 5rem;
++    }
++}
++
++/* ---------- masterclass ---------- */
++/* Mobile-first: titolo sopra, testo sotto, card in colonna. Da 576px due colonne; da 992px quattro colonne e titolo e testo sulla stessa riga */
++.masterclasses {
++    padding: 4rem var(--page-gutter) 5rem;
++    font-family: var(--font-brand);
++    color: var(--brand-bg);
++    background-color: var(--brand-dark);
++}
++
++.masterclasses-header {
++    display: grid;
++    gap: 1.5rem;
++    margin-bottom: 3rem;
++}
++
++.masterclasses-eyebrow {
++    margin: 0;
++    font-size: 0.75rem;
++    font-weight: 500;
++    letter-spacing: 0.2em;
++    text-transform: uppercase;
++    color: color-mix(in srgb, var(--brand-bg) 55%, transparent);
++}
++
++.masterclasses-title {
++    margin: 1.5rem 0 0;
++    font-family: var(--font-logo);
++    font-size: clamp(3rem, 12vw, 5.5rem);
++    font-weight: 300;
++    line-height: 0.95;
++    letter-spacing: -0.03em;
++}
++
++/* la seconda parte del titolo va sempre a capo */
++.masterclasses-title em {
++    display: block;
++    color: var(--brand-red);
++}
++
++.masterclasses-text {
++    max-width: 24rem;
++    margin: 0;
++    padding-left: 1.5rem;
++    font-size: 0.875rem;
++    line-height: 1.9;
++    color: color-mix(in srgb, var(--brand-bg) 60%, transparent);
++    border-left: 1px solid color-mix(in srgb, var(--brand-bg) 25%, transparent);
++}
++
++/* le linee tra le card sono lo sfondo che si vede dagli spazi di 1px: tiene il conto giusto con 4, 8, 12, 16... artisti */
++.masterclasses-grid {
++    display: grid;
++    grid-template-columns: minmax(0, 1fr);
++    gap: 1px;
++    background-color: color-mix(in srgb, var(--brand-bg) 12%, transparent);
++    border: 1px solid color-mix(in srgb, var(--brand-bg) 12%, transparent);
++}
++
++@media (min-width: 576px) {
++    .masterclasses-grid {
++        grid-template-columns: repeat(2, minmax(0, 1fr));
++    }
++}
++
++@media (min-width: 992px) {
++    .masterclasses {
++        padding: 6rem var(--page-gutter);
++    }
++
++    .masterclasses-header {
++        grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
++        align-items: end;
++        gap: 4rem;
++        margin-bottom: 4rem;
++    }
++
++    .masterclasses-grid {
++        grid-template-columns: repeat(4, minmax(0, 1fr));
++    }
++}
+diff --git a/src/app/pages/experience/experience.component.html b/src/app/pages/experience/experience.component.html
+index 9daad55..283fcf3 100644
+--- a/src/app/pages/experience/experience.component.html
++++ b/src/app/pages/experience/experience.component.html
+@@ -3,7 +3,6 @@
+         <div class="eyebrow">Selected milestones</div>
+         <h1 class="intro-title">A young<br>career<br>in <em>motion.</em></h1>
+         <p class="intro-text">Professional work, formative training, competitions, and awards.</p>
+-        <a class="intro-btn" href="/cv.pdf" download>Download CV <span>&rarr;</span></a>
+     </aside>
+ 
+     <div class="timeline">
+@@ -24,4 +23,39 @@
+         <p class="timeline-note">Additional guest training includes classical repertoire, Forsythe technique,
+             partnering, and contemporary improvisation.</p>
+     </div>
+-</section>
+\ No newline at end of file
++</section>
++
++<section class="repertoire">
++    <header class="repertoire-header">
++        <div>
++            <div class="eyebrow">Stage &amp; training</div>
++            <h2 class="repertoire-title">Selected <em>repertoire.</em></h2>
++        </div>
++        <p class="repertoire-text">Explore the theatres and academies that shaped Paolo&rsquo;s practice, from early
++            training to his current professional work.</p>
++    </header>
++
++    <div class="repertoire-list">
++        @for (item of repertoire; track item.name) {
++        <app-repertoire-item [item]="item" [index]="$index" [open]="openIndex() === $index"
++            (onToggle)="toggle($index)" />
++        }
++    </div>
++</section>
++
++<section class="masterclasses">
++    <header class="masterclasses-header">
++        <div>
++            <p class="masterclasses-eyebrow">Continuing practice &middot; {{ masterclasses.length }} artists</p>
++            <h2 class="masterclasses-title">Masterclasses <em>&amp; encounters.</em></h2>
++        </div>
++        <p class="masterclasses-text">A practice continually renewed through encounters with leading dancers, teachers
++            and choreographic voices from the international stage.</p>
++    </header>
++
++    <div class="masterclasses-grid">
++        @for (artist of masterclasses; track artist.name) {
++        <app-masterclass-card [artist]="artist" [index]="$index" />
++        }
++    </div>
++</section>
+diff --git a/src/app/pages/experience/experience.component.ts b/src/app/pages/experience/experience.component.ts
+index b27e0ec..0a80647 100644
+--- a/src/app/pages/experience/experience.component.ts
++++ b/src/app/pages/experience/experience.component.ts
+@@ -1,9 +1,11 @@
+ import { DecimalPipe } from '@angular/common';
+-import { Component } from '@angular/core';
+-import { Milestone } from '../../entities';
++import { Component, signal } from '@angular/core';
++import { Masterclass, Milestone, RepertoireItem } from '../../entities';
++import { MasterclassCardComponent } from '../../components/masterclass-card/masterclass-card.component';
++import { RepertoireItemComponent } from '../../components/repertoire-item/repertoire-item.component';
+ 
+ @Component({
+-  imports: [DecimalPipe],
++  imports: [DecimalPipe, MasterclassCardComponent, RepertoireItemComponent],
+   selector: 'app-experience',
+   styleUrl: './experience.component.css',
+   templateUrl: './experience.component.html',
+@@ -56,4 +58,45 @@ export class ExperienceComponent {
+       featured: true,
+     },
+   ];
+-}
+\ No newline at end of file
++  // per ora si riusano le foto già in public/images; con le foto ufficiali dei teatri basta cambiare image
++  protected readonly repertoire: RepertoireItem[] = [
++    {
++      name: 'Brno Theatre',
++      period: '2024 — Present',
++      location: 'Brno, Czech Republic',
++      role: 'Company artist',
++      image: '/images/about-action.jpg',
++      // finché la lista è vuota la card non ha il pulsante per aprirsi: qui vanno i ruoli danzati a Brno
++      works: [],
++    },
++    {
++      name: 'Annarella Sanchez',
++      period: '2020 — 2024',
++      location: 'Leiria, Portugal',
++      role: 'Advanced student',
++      image: '/images/about-banner.jpg',
++      works: [
++        { title: 'Don Quixote', role: 'Basilio variation', stagedBy: 'Marius Petipa' },
++        { title: 'Le Corsaire', role: 'Pas de deux', stagedBy: 'Marius Petipa' },
++        { title: 'Flames of Paris', role: 'Pas de deux', stagedBy: 'Vasily Vainonen' },
++      ],
++    },
++  ];
++
++  // card aperta (una sola alla volta): null = tutte chiuse
++  protected openIndex = signal<number | null>(null);
++
++  // apre la card premuta (chiudendo quella aperta prima) o richiude quella già aperta
++  protected toggle(index: number) {
++    this.openIndex.set(this.openIndex() === index ? null : index);
++  }
++
++  // artisti ospiti: il numero nell'eyebrow della sezione segue la lunghezza di questa lista.
++  // Foto provvisorie già in public/images: con le foto vere basta cambiare image. Per aggiungere un artista basta una riga
++  protected readonly masterclasses: Masterclass[] = [
++    { name: 'Alexander Sambart', role: 'Guest artist', image: '/images/about-portrait.jpg' },
++    { name: 'David Makhateli', role: 'Guest artist', image: '/images/about-action.jpg' },
++    { name: 'Javier Amo', role: 'Guest artist', image: '/images/about-banner.jpg' },
++    { name: 'Julio Bocca', role: 'Guest artist', image: '/images/hero.jpg' },
++  ];
++}
+diff --git a/src/index.html b/src/index.html
+index 146e2b8..363851d 100644
+--- a/src/index.html
++++ b/src/index.html
+@@ -10,7 +10,7 @@
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@400;500&display=swap"
++    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@400;500;600&display=swap"
+     rel="stylesheet" />
+ </head>
+ 
+diff --git a/src/styles.css b/src/styles.css
+index 1292dd2..2c2d24e 100644
+--- a/src/styles.css
++++ b/src/styles.css
+@@ -8,6 +8,8 @@
+     --brand-red: #e03e2d;
+     --brand-red-dark: #8c1d28;
+     --brand-muted: #6b6760;
++    /* sfondo scuro della sezione Masterclasses */
++    --brand-dark: #272625;
+     --font-brand: 'Jost', system-ui, sans-serif;
+     --font-logo: 'Cormorant Garamond', serif;
+ 
