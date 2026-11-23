@@ -110,7 +110,7 @@ export class ExperienceComponent {
       period: '2024 — Present',
       location: 'Brno, Czech Republic',
       role: 'Company artist',
-      image: '/images/about-action.jpg',
+      image: '/images/brno.jpg',
       // finché la lista è vuota la card non ha il pulsante per aprirsi: qui vanno i ruoli danzati a Brno
       works: [],
     },
@@ -119,7 +119,7 @@ export class ExperienceComponent {
       period: '2020 — 2024',
       location: 'Leiria, Portugal',
       role: 'Advanced student',
-      image: '/images/about-banner.jpg',
+      image: '/images/leiria.jpg',
       works: [
         { title: 'Don Quixote', role: 'Basilio variation', stagedBy: 'Marius Petipa' },
         { title: 'Le Corsaire', role: 'Pas de deux', stagedBy: 'Marius Petipa' },

@@ -16,7 +16,7 @@ describe('RepertoireItemComponent', () => {
       period: '2024 — Present',
       location: 'Brno, Czech Republic',
       role: 'Company artist',
-      image: '/images/about-action.jpg',
+      image: '/images/brno.jpg',
       works: [{ title: 'Don Quixote', role: 'Basilio variation', stagedBy: 'Marius Petipa' }],
     });
     fixture.componentRef.setInput('index', 0);
