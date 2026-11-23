@@ -44,7 +44,7 @@ export type Masterclass = {
     // es. 'Guest artist'
     role: string,
     // percorso della foto in public/images
-    image: string
+    image?: string
 }
 
 // riconoscimento ottenuto a un concorso: una riga dell'elenco nella sezione Prizes & distinctions

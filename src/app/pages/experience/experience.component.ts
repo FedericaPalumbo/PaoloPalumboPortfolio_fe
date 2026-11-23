@@ -139,9 +139,21 @@ export class ExperienceComponent {
   // artisti ospiti: il numero nell'eyebrow della sezione segue la lunghezza di questa lista.
   // Foto provvisorie già in public/images: con le foto vere basta cambiare image. Per aggiungere un artista basta una riga
   protected readonly masterclasses: Masterclass[] = [
-    { name: 'Alexander Sambart', role: 'Guest artist', image: '/images/about-portrait.jpg' },
-    { name: 'David Makhateli', role: 'Guest artist', image: '/images/about-action.jpg' },
-    { name: 'Javier Amo', role: 'Guest artist', image: '/images/about-banner.jpg' },
-    { name: 'Julio Bocca', role: 'Guest artist', image: '/images/hero.jpg' },
+    { name: 'Alexander Sambart', role: 'Guest artist' },
+    { name: 'David Makhateli', role: 'Guest artist' },
+    { name: 'Javier Amo', role: 'Guest artist', image: '/images/masterclasses/amo.jpg' },
+    { name: 'Julio Bocca', role: 'Guest artist', image: '/images/masterclasses/julio.jpg' },
+    { name: 'Lienz Chang', role: 'Guest artist', image: '/images/masterclasses/lienz.jpg' },
+    { name: 'Maina Gielgud', role: 'Guest artist', image: '/images/masterclasses/maina.jpg' },
+    { name: 'Marco Laudani', role: 'Guest artist', image: '/images/masterclasses/marco.jpg' },
+    { name: 'Osiel Gouneo', role: 'Guest artist', image: '/images/masterclasses/osiel.jpg' },
+    { name: 'Martha Iris Fernandes', role: 'Guest artist'},
+    { name: 'Misha Tchoupakov', role: 'Guest artist', image: '/images/masterclasses/misha.jpg' },
+    { name: 'Misha Zavilov', role: 'Guest artist'},
+    { name: 'Oliver Matz', role: 'Guest artist', image: '/images/masterclasses/oliver.jpg' },
+    { name: 'Roberta Ferrara', role: 'Guest artist'},
+    { name: 'Sinner Boquin', role: 'Guest artist'},
+    { name: 'Yannik Boquin', role: 'Guest artist', image: '/images/masterclasses/yannick.jpg' },
+    { name: 'Jose Carlos Martinez', role: 'Guest artist', image: '/images/masterclasses/jose.jpg' },
   ];
 }
