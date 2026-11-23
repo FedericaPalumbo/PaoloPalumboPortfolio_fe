@@ -17,6 +17,9 @@
     --page-gutter: clamp(1.5rem, calc(14.1vw - 3.5rem), 18rem);
     /* proporzioni delle foto delle card del repertorio (605 x 314 px nel riferimento) */
     --repertoire-photo-ratio: 27 / 14;
+    
+        --assets-path: url('/images/');
+      
 }
 
 body {
