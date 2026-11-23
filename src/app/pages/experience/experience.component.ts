@@ -1,11 +1,12 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { Masterclass, Milestone, RepertoireItem } from '../../entities';
+import { Masterclass, Milestone, PrizeYear, RepertoireItem } from '../../entities';
 import { MasterclassCardComponent } from '../../components/masterclass-card/masterclass-card.component';
+import { PrizeYearComponent } from '../../components/prize-year/prize-year.component';
 import { RepertoireItemComponent } from '../../components/repertoire-item/repertoire-item.component';
 
 @Component({
-  imports: [DecimalPipe, MasterclassCardComponent, RepertoireItemComponent],
+  imports: [DecimalPipe, MasterclassCardComponent, PrizeYearComponent, RepertoireItemComponent],
   selector: 'app-experience',
   styleUrl: './experience.component.css',
   templateUrl: './experience.component.html',
@@ -58,6 +59,50 @@ export class ExperienceComponent {
       featured: true,
     },
   ];
+  // riconoscimenti raggruppati per anno, dal più recente al più vecchio: per aggiungerne uno basta una riga nell'anno giusto
+  // (o un nuovo anno in cima)
+  protected readonly prizes: PrizeYear[] = [
+    {
+      year: '2024',
+      distinctions: [
+        { recognition: 'Top 12', category: 'Senior Soloist', competition: 'YGP Finals · New York' },
+      ],
+    },
+    {
+      year: '2023',
+      distinctions: [
+        { recognition: '1st Place', category: 'Classical Soloist', competition: 'YGP · Paris' },
+        { recognition: 'Top 6', category: 'Classical Soloist', competition: 'YGP · Paris' },
+        { recognition: 'Top 6', category: 'Contemporary Soloist', competition: 'YGP · Paris' },
+        { recognition: '2nd Place', category: 'Classical Pas de Deux', competition: 'YGP · Paris' },
+        { recognition: '2nd Place', category: 'Neoclassical Pas de Deux', competition: 'YGP · Paris' },
+        { recognition: 'Invitation', category: 'YGP Finals', competition: 'Tampa, USA' },
+      ],
+    },
+    {
+      year: '2022',
+      distinctions: [
+        { recognition: '3rd Place', category: 'Classical Pas de Deux', competition: 'YGP · Paris' },
+        { recognition: 'Top 6', category: 'Classical Soloist', competition: 'YGP · Paris' },
+      ],
+    },
+    {
+      year: '2019',
+      distinctions: [
+        { recognition: '3rd Place', category: 'Classical Soloist', competition: 'YGP · Italy' },
+        { recognition: 'Top 6', category: 'Classical Soloist', competition: 'YGP · Italy' },
+      ],
+    },
+    {
+      year: '2018',
+      distinctions: [
+        { recognition: '3rd Place', category: 'Classical Soloist', competition: 'YGP · Paris' },
+        // categoria da verificare: nello screenshot di riferimento la riga è tagliata dopo 'Classical'
+        { recognition: 'Top 6', category: 'Classical Soloist', competition: 'YGP · Paris' },
+      ],
+    },
+  ];
+
   // per ora si riusano le foto già in public/images; con le foto ufficiali dei teatri basta cambiare image
   protected readonly repertoire: RepertoireItem[] = [
     {

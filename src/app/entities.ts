@@ -47,6 +47,22 @@ export type Masterclass = {
     image: string
 }
 
+// riconoscimento ottenuto a un concorso: una riga dell'elenco nella sezione Prizes & distinctions
+export type Distinction = {
+    // piazzamento o invito, es. '1st Place', 'Top 6', 'Invitation'
+    recognition: string,
+    // categoria danzata, es. 'Classical Soloist'
+    category: string,
+    // concorso e sede, es. 'YGP · Paris'
+    competition: string
+}
+
+// tutti i riconoscimenti di un anno: la sezione li mostra raggruppati, dal più recente al più vecchio
+export type PrizeYear = {
+    year: string,
+    distinctions: Distinction[]
+}
+
 // banner a tutta larghezza con citazione sopra una foto
 export type QuoteBanner = {
     text: string,
@@ -69,6 +85,8 @@ export type Playable = {
     title: string,
     // percorso della foto in public/images: copertina provvisoria finché non c'è il video
     poster: string,
+    // riga sotto il titolo dell'anteprima, es. 'Don Quixote · YAGP Finals · 2024'
+    caption: string,
     // percorso del file in public/videos, es. '/videos/showreel-2025.mp4'. Se manca, il lettore mostra solo la copertina
     src?: string
 }

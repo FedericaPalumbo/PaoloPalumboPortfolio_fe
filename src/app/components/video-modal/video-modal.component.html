@@ -1,20 +1,26 @@
 <dialog #dialog class="modal" (close)="onClose.emit()" (click)="closeOnBackdrop($event)">
-    <div class="modal-panel">
-        <button type="button" class="modal-close" (click)="close()">Close <span
-                aria-hidden="true">&times;</span></button>
+    <button type="button" class="modal-close" aria-label="Close" (click)="close()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M5 5l14 14M19 5L5 19" />
+        </svg>
+    </button>
 
-        <div class="modal-media">
-            @if (video().src) {
-            <video class="modal-video" [src]="video().src" [poster]="video().poster" controls autoplay
-                playsinline></video>
-            } @else {
-            <img class="modal-image" [src]="video().poster" alt="">
-            <p class="modal-title">{{ video().title }}</p>
-            }
+    <div class="modal-media" [class.modal-media-preview]="!video().src">
+        @if (video().src) {
+        <video class="modal-video" [src]="video().src" [poster]="video().poster" controls autoplay
+            playsinline></video>
+        } @else {
+        <img class="modal-image" [src]="video().poster" alt="">
+        <div class="modal-preview">
+            <span class="modal-play" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 4l14 8-14 8z" />
+                </svg>
+            </span>
+            <p class="modal-title">Showreel preview</p>
+            <p class="modal-caption">{{ video().caption }}</p>
         </div>
-
-        @if (!video().src) {
-        <p class="modal-caption">Video coming soon</p>
         }
     </div>
 </dialog>

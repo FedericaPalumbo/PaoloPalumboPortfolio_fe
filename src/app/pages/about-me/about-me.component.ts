@@ -18,7 +18,7 @@ export class AboutMeComponent {
 
   protected readonly facts: ProfileFact[] = [
     { label: 'Current base', value: 'Brno, Czech Republic' },
-    { label: 'Languages', value: 'Italian · English' },
+    { label: 'Languages', value: 'Italian · English · Spanish · Portuguese' },
     { label: 'Height', value: '178 cm / 5′ 10″' },
     { label: 'Availability', value: 'Worldwide engagements' },
   ];

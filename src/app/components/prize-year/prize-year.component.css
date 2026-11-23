@@ -1,0 +1,129 @@
+/* l'host è un elemento custom (inline di default): va reso block per occupare tutta la larghezza */
+:host {
+    display: block;
+}
+
+.group {
+    --line: color-mix(in srgb, var(--brand-bg) 12%, transparent);
+    --muted: color-mix(in srgb, var(--brand-bg) 60%, transparent);
+
+    display: grid;
+    font-family: var(--font-brand);
+    color: var(--brand-bg);
+    border-top: 1px solid var(--line);
+}
+
+/* ---------- anno ---------- */
+/* Mobile-first: anno e conteggio sulla stessa riga, l'elenco sotto. Da 992px l'anno sta a sinistra e l'elenco a destra */
+.group-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-top: 2rem;
+}
+
+.group-year {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+}
+
+.group-count {
+    margin: 0;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ---------- riconoscimenti ---------- */
+.prizes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* mobile: numero a sinistra, i tre campi uno sotto l'altro */
+.prize {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    row-gap: 1.5rem;
+    padding: 1.75rem 0;
+}
+
+/* la linea separa le righe tra loro, non la prima dall'anno */
+.prize + .prize {
+    border-top: 1px solid var(--line);
+}
+
+.prize-index {
+    grid-row: 1;
+    padding-top: 0.15rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+.prize-field {
+    grid-column: 2;
+}
+
+.prize-label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.prize-recognition {
+    margin: 0;
+    font-size: clamp(1.25rem, 1.4vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--brand-red);
+}
+
+.prize-value {
+    margin: 0;
+    font-family: var(--font-logo);
+    font-size: clamp(1.75rem, 2.1vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 992px) {
+
+    /* anno | riconoscimenti */
+    .group {
+        grid-template-columns: 14rem minmax(0, 1fr);
+    }
+
+    /* l'anno parte alla stessa altezza dei campi della prima riga */
+    .group-head {
+        display: block;
+        padding-top: 2.5rem;
+    }
+
+    .group-count {
+        margin-top: 0.75rem;
+    }
+
+    /* numero | riconoscimento | categoria | concorso */
+    .prize {
+        grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1.7fr) minmax(0, 1.3fr);
+        column-gap: 0;
+        padding: 2.5rem 0;
+    }
+
+    .prize-index {
+        grid-row: auto;
+    }
+
+    .prize-field {
+        grid-column: auto;
+    }
+}

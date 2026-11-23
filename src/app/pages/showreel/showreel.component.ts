@@ -17,6 +17,7 @@ export class ShowreelComponent {
     duration: '01:42',
     tags: 'Classical, contemporary & partnering',
     poster: '/images/hero.jpg',
+    caption: 'Classical, contemporary & partnering · 2025',
   };
 
   protected readonly videos: Video[] = [
@@ -26,6 +27,7 @@ export class ShowreelComponent {
       meta: '2024 · YAGP Finals, USA',
       role: 'Senior Men Solo',
       poster: '/images/about-action.jpg',
+      caption: 'Don Quixote · YAGP Finals · 2024',
     },
     {
       title: 'Between Two Breaths',
@@ -33,6 +35,7 @@ export class ShowreelComponent {
       meta: '2025 · Studio Film',
       role: 'Contemporary Solo',
       poster: '/images/about-portrait.jpg',
+      caption: 'Between Two Breaths · Studio Film · 2025',
     },
     {
       title: 'Le Corsaire — Pas de deux',
@@ -40,6 +43,7 @@ export class ShowreelComponent {
       meta: '2023 · Youth America Grand Prix',
       role: 'Partnering with Nuria Fernandes',
       poster: '/images/hero.jpg',
+      caption: 'Le Corsaire · Youth America Grand Prix · 2023',
     },
     {
       title: 'Rehearsal Room',
@@ -47,6 +51,7 @@ export class ShowreelComponent {
       meta: '2025 · Brno Theatre',
       role: 'Company Artist',
       poster: '/images/about-banner.jpg',
+      caption: 'Rehearsal Room · Brno Theatre · 2025',
     },
   ];
 

@@ -29,7 +29,7 @@ export class ContactsComponent {
   private contactSrv = inject(ContactService);
   private destroyRef = inject(DestroyRef);
 
-  protected readonly email = 'studio@paolopalumbo.com';
+  protected readonly email = 'palumbop048@gmail.com';
 
   protected readonly socials: SocialLink[] = [
     { label: 'Instagram', url: 'https://www.instagram.com/' },

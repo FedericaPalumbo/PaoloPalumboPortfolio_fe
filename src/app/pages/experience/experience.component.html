@@ -25,6 +25,23 @@
     </div>
 </section>
 
+<section class="prizes">
+    <header class="prizes-header">
+        <div>
+            <div class="eyebrow eyebrow-light">Prizes &amp; distinctions</div>
+            <h2 class="prizes-title">Honours earned through <em>movement.</em></h2>
+        </div>
+        <p class="prizes-text">International recognition across classical, contemporary and pas de deux repertory at
+            the Youth America Grand Prix.</p>
+    </header>
+
+    <div class="prizes-list">
+        @for (group of prizes; track group.year) {
+        <app-prize-year [group]="group" />
+        }
+    </div>
+</section>
+
 <section class="repertoire">
     <header class="repertoire-header">
         <div>
@@ -46,7 +63,7 @@
 <section class="masterclasses">
     <header class="masterclasses-header">
         <div>
-            <p class="masterclasses-eyebrow">Continuing practice &middot; {{ masterclasses.length }} artists</p>
+            <div class="eyebrow eyebrow-light">Continuing practice &middot; {{ masterclasses.length }} artists</div>
             <h2 class="masterclasses-title">Masterclasses <em>&amp; encounters.</em></h2>
         </div>
         <p class="masterclasses-text">A practice continually renewed through encounters with leading dancers, teachers

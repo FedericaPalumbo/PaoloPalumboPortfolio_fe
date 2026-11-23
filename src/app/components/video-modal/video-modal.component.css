@@ -1,43 +1,84 @@
-/* il padding sta nel pannello e non nel <dialog>: così un click sul <dialog> è sempre un click sullo sfondo */
+/* il <dialog> occupa tutto lo schermo ed è lui stesso il contenitore: un click fuori dal video arriva al <dialog>
+e lo chiude. Lo sfondo scuro è nel ::backdrop, così la pagina resta appena visibile dietro */
 .modal {
-    width: min(76rem, 92vw);
+    width: 100%;
+    height: 100%;
     max-width: none;
+    max-height: none;
+    margin: 0;
     padding: 0;
-    color: var(--brand-ink);
-    background-color: var(--brand-bg);
+    overflow: hidden;
+    font-family: var(--font-brand);
+    color: #fff;
+    background: none;
     border: 0;
 }
 
-.modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.75);
-}
-
-.modal-panel {
+/* display solo da aperto: altrimenti il grid vincerebbe sul display: none del <dialog> chiuso */
+.modal[open] {
     display: grid;
-    gap: 1.25rem;
-    padding: 1.25rem 1.25rem 1.5rem;
-    font-family: var(--font-brand);
+    place-items: center;
+    animation: fade-in 0.3s ease;
 }
 
+.modal::backdrop {
+    background-color: rgba(10, 10, 10, 0.96);
+    animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .modal[open],
+    .modal::backdrop {
+        animation: none;
+    }
+}
+
+/* ---------- chiusura: sola croce in alto a destra ---------- */
 .modal-close {
-    justify-self: end;
-    padding: 0;
-    font: inherit;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    position: absolute;
+    top: clamp(1rem, 3vw, 3.5rem);
+    right: clamp(1rem, 3vw, 3.5rem);
+    display: grid;
+    place-items: center;
+    padding: 0.5rem;
     color: inherit;
     background: none;
     border: 0;
     cursor: pointer;
+    transition: opacity 0.25s;
+}
+
+.modal-close:hover {
+    opacity: 0.6;
+}
+
+.modal-close:focus-visible {
+    outline: 1px solid #fff;
+    outline-offset: 2px;
 }
 
 /* ---------- video o copertina ---------- */
+/* la larghezza segue il rapporto: il riquadro non supera mai l'80% dell'altezza dello schermo */
 .modal-media {
+    --ratio: 16 / 9;
     position: relative;
-    aspect-ratio: 16 / 9;
-    max-height: 75vh;
+    width: min(92vw, 86rem, calc(80vh * var(--ratio)));
+    aspect-ratio: var(--ratio);
     background-color: var(--brand-ink);
+}
+
+/* l'anteprima è più panoramica del video vero, ma solo da tablet in su */
+@media (min-width: 768px) {
+    .modal-media-preview {
+        --ratio: 21 / 9;
+    }
 }
 
 .modal-video,
@@ -45,32 +86,53 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+}
+
+.modal-video {
+    object-fit: contain;
 }
 
 .modal-image {
+    object-fit: cover;
     object-position: center 25%;
-    filter: brightness(0.6);
+    filter: brightness(0.55);
+}
+
+/* ---------- anteprima: tasto, titolo e riga di testo al centro della foto ---------- */
+.modal-preview {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.modal-play {
+    display: grid;
+    place-items: center;
+    width: clamp(4rem, 7vw, 6.75rem);
+    aspect-ratio: 1;
+    margin-bottom: clamp(1rem, 2vw, 1.75rem);
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
 }
 
 .modal-title {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
     margin: 0;
-    padding: 0 1.5rem;
-    text-align: center;
     font-family: var(--font-logo);
-    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
     font-weight: 300;
-    color: #fff;
+    line-height: 1.1;
 }
 
 .modal-caption {
-    margin: 0;
-    text-align: center;
-    font-size: 0.6875rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.75rem;
+    font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
 }

@@ -26,6 +26,11 @@
     background-color: var(--brand-red-dark);
 }
 
+/* sezioni scure (premi e masterclass): il rosso scuro sparirebbe sullo sfondo, la linea passa al rosso vivo */
+.eyebrow-light::before {
+    background-color: var(--brand-red);
+}
+
 .intro-title {
     margin: 1.5rem 0;
     font-family: var(--font-logo);
@@ -157,10 +162,93 @@
     }
 }
 
+/* ---------- premi ---------- */
+/* Mobile-first: titolo sopra, testo sotto. Da 1400px titolo a sinistra e testo a destra, sulla stessa riga:
+   prima non c'è abbastanza larghezza perché il titolo resti su due righe */
+.prizes {
+    position: relative;
+    overflow: hidden;
+    padding: 4rem var(--page-gutter) 5rem;
+    font-family: var(--font-brand);
+    color: var(--brand-bg);
+    background-color: var(--brand-dark);
+}
+
+/* cerchio decorativo: solo il contorno, appena visibile, tagliato dall'angolo in alto a destra */
+.prizes::before {
+    --circle: clamp(18rem, 44vw, 54rem);
+
+    content: '';
+    position: absolute;
+    top: calc(var(--circle) * -0.5);
+    right: calc(var(--circle) * -0.42);
+    box-sizing: border-box;
+    width: var(--circle);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--brand-bg) 8%, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.prizes-header {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.prizes-title {
+    max-width: 9em;
+    margin: 1.5rem 0 0;
+    font-family: var(--font-logo);
+    font-size: clamp(3.5rem, 7vw, 8rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+}
+
+/* la seconda parte del titolo va sempre a capo */
+.prizes-title em {
+    display: block;
+    color: var(--brand-red);
+}
+
+.prizes-text {
+    max-width: 26rem;
+    margin: 0;
+    padding-left: 1.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    color: color-mix(in srgb, var(--brand-bg) 70%, transparent);
+    border-left: 1px solid var(--brand-red);
+}
+
+/* ogni anno ha il bordo sopra: la lista chiude con quello sotto */
+.prizes-list {
+    border-bottom: 1px solid color-mix(in srgb, var(--brand-bg) 12%, transparent);
+}
+
+@media (min-width: 992px) {
+    .prizes {
+        padding: 6rem var(--page-gutter);
+    }
+
+    .prizes-header {
+        margin-bottom: 5rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .prizes-header {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+        align-items: end;
+        gap: 4rem;
+    }
+}
+
 /* ---------- repertorio ---------- */
 /* Mobile-first: titolo sopra, testo sotto. Da 992px titolo a sinistra e testo a destra, sulla stessa riga */
 .repertoire {
-    padding: 0 var(--page-gutter) 5rem;
+    padding: 4rem var(--page-gutter) 5rem;
     font-family: var(--font-brand);
     color: var(--brand-ink);
     background-color: var(--brand-bg);
@@ -198,7 +286,7 @@
 
 @media (min-width: 992px) {
     .repertoire {
-        padding-bottom: 6rem;
+        padding-block: 6rem;
     }
 
     .repertoire-header {
@@ -222,15 +310,6 @@
     display: grid;
     gap: 1.5rem;
     margin-bottom: 3rem;
-}
-
-.masterclasses-eyebrow {
-    margin: 0;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: color-mix(in srgb, var(--brand-bg) 55%, transparent);
 }
 
 .masterclasses-title {

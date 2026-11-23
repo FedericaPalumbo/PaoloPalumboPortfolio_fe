@@ -1,0 +1,29 @@
+<article class="group">
+    <header class="group-head">
+        <h3 class="group-year">{{ group().year }}</h3>
+        <p class="group-count">{{ count() }}</p>
+    </header>
+
+    <ol class="prizes">
+        @for (distinction of group().distinctions; track $index) {
+        <li class="prize">
+            <span class="prize-index">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+
+            <div class="prize-field">
+                <span class="prize-label">Recognition</span>
+                <p class="prize-recognition">{{ distinction.recognition }}</p>
+            </div>
+
+            <div class="prize-field">
+                <span class="prize-label">Performed category</span>
+                <p class="prize-value">{{ distinction.category }}</p>
+            </div>
+
+            <div class="prize-field">
+                <span class="prize-label">Competition</span>
+                <p class="prize-value">{{ distinction.competition }}</p>
+            </div>
+        </li>
+        }
+    </ol>
+</article>
