@@ -13,7 +13,7 @@ export class AboutMeComponent {
   protected readonly quote: QuoteBanner = {
     text: 'Meravigliosa performance, uno dei dieci giovani talenti italiani.',
     author: 'Carla Fracci',
-    image: '/images/about-banner.jpg',
+    image: 'images/about-banner.jpg',
   };
 
   protected readonly facts: ProfileFact[] = [
