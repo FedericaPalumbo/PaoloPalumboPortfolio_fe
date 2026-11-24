@@ -1,14 +1,22 @@
-<nav class="app-navbar" [class.app-navbar-home]="isHome()">
-    <a class="brand" routerLink="/">
+<nav class="app-navbar" [class.app-navbar-home]="isHome()" [class.app-navbar-open]="menuOpen()">
+    <a class="brand" routerLink="/" (click)="closeMenu()">
         <span class="brand-logo">PP</span>
         <span class="brand-role">Dance<br />Artist</span>
     </a>
 
-    <div class="nav-links">
-        <a routerLink="/about-me" routerLinkActive="active">About Me</a>
-        <a routerLink="/experience" routerLinkActive="active">Experience</a>
-        <a routerLink="/showreel" routerLinkActive="active">Videos</a>
-        <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
-        <a routerLink="/contacts" routerLinkActive="active">Contact</a>
+    <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Menu"
+        aria-controls="nav-links"
+        [attr.aria-expanded]="menuOpen()"
+        (click)="toggleMenu()">
+        <span class="nav-toggle-bar"></span>
+    </button>
+
+    <div class="nav-links" id="nav-links">
+        @for (link of links; track link.path) {
+            <a [routerLink]="link.path" routerLinkActive="active" (click)="closeMenu()">{{ link.label }}</a>
+        }
     </div>
 </nav>

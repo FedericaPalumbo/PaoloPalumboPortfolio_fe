@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -8,6 +8,7 @@ import { filter, map } from 'rxjs';
   selector: 'app-navbar',
   styleUrl: './navbar.component.css',
   templateUrl: './navbar.component.html',
+  host: { '(document:keydown.escape)': 'closeMenu()' },
 })
 export class NavbarComponent {
   private router = inject(Router);
@@ -23,4 +24,16 @@ export class NavbarComponent {
 
   // sulla home la navbar è trasparente e sta sopra l'immagine di sfondo
   isHome = computed(() => this.currentPath() === '/');
+  protected readonly links = [
+    { path: '/about-me', label: 'About Me' },
+    { path: '/experience', label: 'Experience' },
+    { path: '/showreel', label: 'Videos' },
+    { path: '/gallery', label: 'Gallery' },
+    { path: '/contacts', label: 'Contact' },
+  ];
+
+  menuOpen = signal(false);
+
+  toggleMenu() { this.menuOpen.update(open => !open); }
+  closeMenu() { this.menuOpen.set(false); }
 }
